@@ -134,6 +134,9 @@
 \end{problem}
 
 \begin{solution}
+  El enlace a los códigos del ejercicio 1 se encuentra
+  \href{https://colab.research.google.com/drive/1INC0Hm5ToZ22szOR6O2550CCoFIQ1jXs?usp=sharing}{\color{blue}aquí}.
+
   Observamos de la Fig. \ref{Fig:1.1} que tenemos cierta tendencia a la alza según pasan los años. Además notamos estacional pues los picos y valles parecen equidistantes.
 
 
@@ -629,6 +632,25 @@ lo que concluye el ejercicio.
 
 \begin{solution}
     
+Observemos que $X_t$ solo tiene dependencia de $e_t$ y $e_{t-1}$, es decir solo hay dependencia entre valores consecutivos del tiempo. Entonces es claro que
+\begin{align*}
+  X_{t_1} \overset{ley}{=} X_{t_1 + \tau}
+\end{align*}
+
+Como para todo  par de valores del tiempo no consecutivos $t_1$ y $t_2$ son independientes. Entonces
+\begin{align*}
+  (X_{t_1},X_{t_2} ) \overset{ley}{=} (X_{t_1 + \tau},X_{t_2 + \tau})
+\end{align*}
+para todo $\tau$. 
+Inductivamente podemos argumentar para cada conjunto de valores no consecutivos del tiempo. Es decir si tomamos $(t_1,t_2,\cdots,t_n)$ y $\tau$ arbitrario se satisface que
+\begin{align*}
+  (X_{t_1},X_{t_2} ,\cdots, X_{t_n}) \overset{ley}{=}    (X_{t_1+ \tau},X_{t_2+\tau} ,\cdots, X_{t_n + \tau}) 
+\end{align*}
+que son equivalentes a la distribución de las finito dimensionales, que es la definición de una serie temporal estacionaria estricta.
+
+El inciso dos se sigue ya que sabemos que la estacionaridad estricta implica la estacionaridad en covarianza. 
+
+
 \end{solution}
 
 
@@ -657,14 +679,34 @@ lo que concluye el ejercicio.
       &= \frac{4}{5} e^{0ih} + \frac{1}{10}e^{2ih} + \frac{1}{10} e^{-2hi },\\
       &= \mathbb{E }[e^{ihY}]
     \end{align*}
-    que es la función característica te una variable discreta $Y$ con distribución $\mathbb{P}(Y = 0) = 4/5$,  $  \mathbb{P }(Y = -2) = \mathbb{P }(Y = 2) = 1/5$. Se sigue que $rho$ es una función definida positiva.
+    que es la función característica te una variable discreta $Y$ con distribución $\mathbb{P}(Y = 0) = 4/5$,  $  \mathbb{P }(Y = -2) = \mathbb{P }(Y = 2) = 1/5$. Se sigue que $\rho$ es una función definida positiva.
 
-    Luego, si $\rho(h)$
+    Luego, si $\rho(h)$ es definida positiva entonces
+    \begin{align*}
+      \sum_{i,j=1}^{n } a_i \rho(i-j) a_j &\geq 0 
+    \end{align*}
+    para todo $n$ y todo $a_i\in \mathbb{R }  $. Así
+    \begin{align*}
+    \sum_{i,j=1}^{n } a_i \frac{g(i-j)}{g(0)} a_j &\geq 0,\\
+    \sum_{i,j=1}^{n } a_i g(i-j) a_j &\geq 0
+  \end{align*}
+  lo que implica que $g(h)$ es una función definida positiva. Por tanto, $g(h)$ es en efecto una función de covarianza.
+
+
+  \item  Al igual que el inciso anterior, en este caso tambien $g(h )$ es una función de covarianza. Pero no es una función par. Se sigue que no es una función de covarianza.
+  \item En este caso $g(-h ) = g(h )$ es una función par. Podriamos proceder a buscar si se trata de una función semidefinida positiva pero con un contraejemplo podemos negarlo. 
+  
+  Supongamos se trata de una función de covarianza, entonces su función de correlación es
+  \begin{align*}
+    \rho(h ) = \frac{g(h )}{g(0)} = 1 +  |h|
+  \end{align*}
+  Luego, la correlación no está acotada por 1, esto es $\rho(h ) > 1 $ para cierto $h$. Lo que contradice que es una función de correlación.
+
+
   \end{enumerate}
 \end{solution}
 
 
-\newpage
 
 \begin{problem}{6}
     Sea $X_t$ un proceso estacionario que satisface $X_t+ X_{t-1}= e_t$, $t= 0,\pm1, \pm2,...$ donde $e_t$ es un ruido blanco. Prueba que $X_{t+h} = (-1)^h X_t$ con probabilidad 1.
