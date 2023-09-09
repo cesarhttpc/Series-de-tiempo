@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.8.29)  8 SEP 2023 20:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.8.29)  8 SEP 2023 22:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -906,10 +906,73 @@ Package mdframed Info: mdframed detected package amsthm
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 715.
+<Figures/DescomposicionToda.png, id=151, 987.2082pt x 473.3685pt>
+File: Figures/DescomposicionToda.png Graphic file (type png)
+<use Figures/DescomposicionToda.png>
+Package pdftex.def Info: Figures/DescomposicionToda.png  used on input line 739.
+(pdftex.def)             Requested size: 512.1496pt x 245.5752pt.
+
+Overfull \hbox (6.2596pt too wide) in paragraph at lines 739--740
+ [][] 
+ []
+
+[13]
+<Figures/Descomposicion.png, id=161, 987.2082pt x 473.3685pt>
+File: Figures/Descomposicion.png Graphic file (type png)
+<use Figures/Descomposicion.png>
+Package pdftex.def Info: Figures/Descomposicion.png  used on input line 748.
+(pdftex.def)             Requested size: 512.1496pt x 245.5752pt.
+
+Overfull \hbox (6.2596pt too wide) in paragraph at lines 748--749
+ [][] 
+ []
+
+<Figures/Descomposicion2.png, id=162, 987.2082pt x 473.3685pt>
+File: Figures/Descomposicion2.png Graphic file (type png)
+<use Figures/Descomposicion2.png>
+Package pdftex.def Info: Figures/Descomposicion2.png  used on input line 759.
+(pdftex.def)             Requested size: 512.1496pt x 245.5752pt.
+
+Overfull \hbox (6.2596pt too wide) in paragraph at lines 759--760
+ [][] 
+ []
+
+[14 <./Figures/DescomposicionToda.png> <./Figures/Descomposicion.png>]
+<Figures/correlo1.png, id=171, 990.099pt x 216.81pt>
+File: Figures/correlo1.png Graphic file (type png)
+<use Figures/correlo1.png>
+Package pdftex.def Info: Figures/correlo1.png  used on input line 772.
+(pdftex.def)             Requested size: 512.1496pt x 112.15297pt.
+
+Overfull \hbox (6.2596pt too wide) in paragraph at lines 772--773
+ [][] 
+ []
+
+<Figures/correlo2.png, id=172, 990.099pt x 216.81pt>
+File: Figures/correlo2.png Graphic file (type png)
+<use Figures/correlo2.png>
+Package pdftex.def Info: Figures/correlo2.png  used on input line 780.
+(pdftex.def)             Requested size: 512.1496pt x 112.15297pt.
+
+Overfull \hbox (6.2596pt too wide) in paragraph at lines 780--781
+ [][] 
+ []
+
+<Figures/correlo3.png, id=173, 990.099pt x 216.81pt>
+File: Figures/correlo3.png Graphic file (type png)
+<use Figures/correlo3.png>
+Package pdftex.def Info: Figures/correlo3.png  used on input line 788.
+(pdftex.def)             Requested size: 512.1496pt x 112.15297pt.
+
+Overfull \hbox (6.2596pt too wide) in paragraph at lines 788--789
+ [][] 
+ []
+
+[15 <./Figures/Descomposicion2.png> <./Figures/correlo1.png> <./Figures/correlo2.png>]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 729.
- [13] (c:\Users\ce_ra\Documents\CIMAT\Semestres\Tercero\Series Tiempo\Series de tiempo\Tarea1\build\Tarea1.aux
+(mdframed)              on input line 803.
+ [16 <./Figures/correlo3.png>] (c:\Users\ce_ra\Documents\CIMAT\Semestres\Tercero\Series Tiempo\Series de tiempo\Tarea1\build\Tarea1.aux
 LaTeX Info: Redefining \. on input line 23.
 LaTeX Info: Redefining \% on input line 23.
 )
@@ -921,17 +984,17 @@ Package rerunfilecheck Info: File `Tarea1.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 28734 strings out of 475503
- 551153 string characters out of 5761834
+ 28791 strings out of 475503
+ 552568 string characters out of 5761834
  2013248 words of memory out of 5000000
- 49394 multiletter control sequences out of 15000+600000
+ 49442 multiletter control sequences out of 15000+600000
  584288 words of font info for 99 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,16n,93p,632b,2166s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\ce_ra\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecit0900.pk> <C:\Users\ce_ra\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk><C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmbb.pfb><C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmr.pfb><C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "c:\Users\ce_ra\Documents\CIMAT\Semestres\Tercero\Series Tiempo\Series de tiempo\Tarea1\build\Tarea1.pdf" (13 pages, 390601 bytes).
+Output written on "c:\Users\ce_ra\Documents\CIMAT\Semestres\Tercero\Series Tiempo\Series de tiempo\Tarea1\build\Tarea1.pdf" (16 pages, 895076 bytes).
 PDF statistics:
- 295 PDF objects out of 1000 (max. 8388607)
- 75 named destinations out of 1000 (max. 500000)
- 48 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 327 PDF objects out of 1000 (max. 8388607)
+ 84 named destinations out of 1000 (max. 500000)
+ 78 words of extra memory for PDF output out of 10000 (max. 10000000)
 

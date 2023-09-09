@@ -723,7 +723,75 @@ El inciso dos se sigue ya que sabemos que la estacionaridad estricta implica la 
     \end{enumerate}
 \end{problem}
 
+\begin{solution}
+  El enlace al código de las gráficas se encuentra \href{https://colab.research.google.com/drive/17pDQbuU8HUqCVDNiB1P55JdytZBxGhts?usp=sharing}{\color{blue}aquí}
 
+  Consideramos el modelo aditivo, esto es el modelo donde las dependencia de la serie de tiempo con la tendencia y la estacionalidad y errores son terminos de $X_t$. Es decir,
+  \begin{align*}
+    X_t = T_t + N_t + e_t   
+  \end{align*}
+  Donde $X_t$ es la serie de tiempo, $T_t$ es la tendencia, $N_t$ es la estacionalidad y $e_t$ son los errores.
+
+  Para hacer este anális consideramos solamente los datos que corresponden a toda la serie temporal, es decir sin discriminar por la fuente.
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width = 18 cm ]{Figures/DescomposicionToda.png}
+    \caption{Descomposición de la serie de tiempo para las anomalías en las temperaturas mensuales.}
+    \label{Fig:8.1}
+  \end{figure}
+
+  Vemos que la estacionalidad no esta tan clara en está descomposición para todos los datos. Podemos hacer el análisis solo para los datos que pertenecen a la fuente GCAG.
+  
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width = 18 cm ]{Figures/Descomposicion.png}
+    \caption{Descomposición de la serie de tiempo para las anomalías en las temperaturas mensuales obtenidos de GCAG.}
+    \label{Fig:8.2}
+  \end{figure}
+
+  La estacionalidad está mas clara pues vemos que hay saltos equidistantes cada 12 meses.
+
+  Por último para la fuente GISTEMP tenemos la descomposición
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width = 18 cm ]{Figures/Descomposicion2.png}
+    \caption{Descomposición de la serie de tiempo para las anomalías en las temperaturas mensuales obtenidos de GISTEMP.}
+    \label{Fig:8.3}
+  \end{figure}
+
+  Vemos que la estimación	de la tendencia en cualquier filtración de los datos va a la baja. Es decir, hay menos anomalías climaticas conforme pasan el año. Los errores no aparentan ningun patron por lo que podemos pensar que efectivamente son aleatorios. 
+
+  Por otro lado, vamos a mostrar los correlogramas para la base de datos completa y para cada una de sus fuentes. 
+
+  
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width = 18 cm ]{Figures/correlo1.png}
+    \caption{Correlograma para los errores del modelo aditivo de la serie de tiempo para las anomalías en las temperaturas mensuales obtenidos por ambas fuentes.}
+    \label{Fig:8.4}
+  \end{figure}
+
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width = 18 cm ]{Figures/correlo2.png}
+    \caption{Correlograma para los errores del modelo aditivo de la serie de tiempo para las anomalías en las temperaturas mensuales obtenidos por fuente GCAG.}
+    \label{Fig:8.5}
+  \end{figure}
+
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width = 18 cm ]{Figures/correlo3.png}
+    \caption{Correlograma para los errores del modelo aditivo de la serie de tiempo para las anomalías en las temperaturas mensuales obtenidos por la fuente GISTEMP.}
+    \label{Fig:8.6}
+  \end{figure}
+  Vemos que estos correlogramas y correlogramas parciales decaen a cero por lo que pudiese pensarse que provienen de series de tiempo estacionarias, sin embargo se require una prueba formal para aceptar o descartar dicho caso.
+
+\end{solution}
 
 
 \begin{problem}{9}
