@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.8.29)  8 SEP 2023 22:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.8.29)  8 SEP 2023 22:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -971,7 +971,7 @@ Overfull \hbox (6.2596pt too wide) in paragraph at lines 788--789
 [15 <./Figures/Descomposicion2.png> <./Figures/correlo1.png> <./Figures/correlo2.png>]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 803.
+(mdframed)              on input line 797.
  [16 <./Figures/correlo3.png>] (c:\Users\ce_ra\Documents\CIMAT\Semestres\Tercero\Series Tiempo\Series de tiempo\Tarea1\build\Tarea1.aux
 LaTeX Info: Redefining \. on input line 23.
 LaTeX Info: Redefining \% on input line 23.
