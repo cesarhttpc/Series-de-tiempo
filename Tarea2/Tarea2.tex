@@ -1,0 +1,189 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{comment}
+\usepackage{lipsum} 
+\usepackage{fullpage} %cambiar margen
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+
+\usepackage{amssymb,amsthm} 
+\usepackage{amsmath}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{verbatim}
+%\usepackage[numbered]{mcode}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{arrows,calc,positioning}
+\usepackage{mathpazo} %tipo de letra 
+\usepackage[utf8]{inputenc} %codificación
+\usepackage[T1]{fontenc} %digitación de tildes y ñ
+\usepackage[spanish]{babel} %paquete de soporte español
+
+\tikzset{
+	block/.style = {draw, rectangle,
+		minimum height=1cm,
+		minimum width=1.5cm},
+	input/.style = {coordinate,node distance=1cm},
+	output/.style = {coordinate,node distance=4cm},
+	arrow/.style={draw, -latex,node distance=2cm},
+	pinstyle/.style = {pin edge={latex-, black,node distance=2cm}},
+	sum/.style = {draw, circle, node distance=1cm},
+}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+
+\usepackage{listings}
+\lstset{literate=
+  {á}{{\'a}}1
+  {é}{{\'e}}1
+  {í}{{\'i}}1
+  {ó}{{\'o}}1
+  {ú}{{\'u}}1
+  {Á}{{\'A}}1
+  {É}{{\'E}}1
+  {Í}{{\'I}}1
+  {Ó}{{\'O}}1
+  {Ú}{{\'U}}1
+  {ñ}{{\~n}}1
+  {ü}{{\"u}}1
+  {Ü}{{\"U}}1
+}
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{customasm}{
+  belowcaptionskip=1\baselineskip,
+  frame=L,
+  xleftmargin=\parindent,
+  language=[x86masm]Assembler,
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\itshape\color{purple!40!black},
+}
+
+\lstset{escapechar=@,style=customc}
+
+
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\newenvironment{problem}[2][Ejercicio]
+{ \begin{mdframed}[backgroundcolor= red!50] \textbf{#1 #2} \\}
+	{  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+{\textcolor{blue}{\textbf{\textit{Solución:\\\noindent}}}}
+
+
+\renewcommand{\qed}{\quad\qedsymbol}
+
+% \\	
+\begin{document}
+	\noindent
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\begin{minipage}[b][1.2cm][t]{0.8\textwidth}
+		\large\textbf{César Isaí García Cornejo} \hfill \textbf{Tarea 1}  \\
+		cesar.cornejo@cimat.mx \hfill \\
+		\normalsize Series de Tiempo \hfill Semestre 3\\
+	\end{minipage}
+	
+	\hspace{14.4cm}
+	\begin{minipage}[b][0.03cm][t]{0.12\linewidth}
+		
+		\vspace{-2.2cm}
+		%%%La Ruta depeendera de donde este alojado el main y la imagen
+		\includegraphics[scale=0.3]{Figures/EscudoCimat.png}
+	\end{minipage}
+	
+	\noindent\rule{7in}{2.8pt}
+	
+	%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Problem 1
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setlength{\parskip}{\medskipamount}
+	\setlength{\parindent}{0pt}
+ %///////////////////////////////////////////////////
+\begin{problem}{1}
+    Considera un proceso estacionario $AR(1)$ dado por 
+    \begin{align*}
+        Y_t = \frac{1}{2}Y_{t-1} + e_t 
+    \end{align*}
+    donde $e_t$ son no-correlacionados $(0,\sigma^2)$. Define 
+    \begin{align*}
+        v_t = Y_t - 2Y_{t-1}.
+    \end{align*}
+    \begin{enumerate}
+        \item Demuestra que el residual $v_t$ es una sucesión de v.a. no -correlacionadas $(0, \sigma_v^2)$. ?` Cuál es la varianza de $v_t$ ? ?` Quién tiene más varainza $e_t$ o $v_t$ ?
+        \item Demuestra que $e_t$ no está correlacionado con $Y_{t-1}$ y que $v_t$ está correlacionado con $Y_{t-1}$ .
+        \item Expresa $Y_t$ como una media móvil $MA(\infty)$.
+    \end{enumerate}
+
+    La raíz de la ecuación característica de la ecuación en diferencias sociada a $Y_t = 2 Y_{t-1} + v_{t }$ es 2 (i.e. es mayor que uno). Entonces, para $ Y_t = \alpha_1 Y_{t-1} + v_t$, las condiciones $v_t$ no-correlacionadas $(0, \sigma^2_v )$ y $|a_1| > 1$ no implican que $Y_t$ es no-estacionario.
+
+    En este ejemplo preferimos la representacion $Y_t = \frac{1}{2}Y_{t-1} + v_t$ pues, como demostrarás en $a)-c)$, el error tiene menor varianza y no está correlacionado con 
+    
+    
+    
+    
+    
+\end{problem}
+
+\begin{problem}{2}
+    Sea $Y_t$ una serie de tiempo definida como 
+    \begin{align*}
+        Y_t = \beta_0 + \beta_1 t + X_t \:\:\:\:\:\: t = 1,2, \cdots
+    \end{align*}
+    donde
+    \begin{align*}
+        X_t = e_t + 0.6 e_{t-1},
+    \end{align*}
+    con $\beta_0,\beta_1$ fijos y $\{e_t: t\in \mathbb{N}\cup \{0\} \} $ distribuidas $N(0,sigma^2)$ Construye la media y la función de covarianza para $Y_t$.
+\end{problem}
+
+\begin{problem}
+    Sean $X_i \sim N(0, \sigma^2) \: \: i = 1,2,\cdots$ independientes y sea $\bar{X}_n = n^{-1} \sum _{i=1}^n X_i .$
+    \begin{enumerate}
+        \item Se sabe que $\mu \neq 0$. ?` Cómo aproximarías la distribución de $\bar{X}_n^2 $ en muestras grandes? 
+        \item Se sabe que $\mu = 0$. ?` Cómo aproximarías la distibución de $\bar{X}_n^2$ en muestras grandes ?
+        \item Comenta qué pasa si quitamos el supuesto de independencia en los incisos anteriores. 
+    \end{enumerate} 
+    Explica con detalle los procedimientos y asegúrate de que no se den distribuciones límites degenerads. Este ejercicio es para recordar los procedimientos más básicos para variables aleatorias.
+\end{problem}
+
+\begin{problem}{4}
+    Monstrar que si $m^p + a_1 m^{p-1} + \cdots + a_p = 0 $ tiene todas sus raíces menores que uno en módulo, entonces $1+ a_1 q + \cdots + a_p q^p = 0$ tiene todas sus raíces mayoures que uno en módulo. \textit{Hint: si r es una raíz del primer polinomio, es ?` es 1/r una raíz del segundo?}    
+\end{problem}
+
+% \begin{problem}{5}
+%     Si $m_1, \cdots, m_p$ son las raíces de $ m^p - \sum _{i=1}^p \alpha_i m^{p-i} =  0$, entonces
+%     \begin{enumerate}
+%         \item $\sum _{i=1}^p \alpha_i = 1$ si y sólo si al menos una raíz es igual a 1.
+%         \item Si todas las raíces en módulo son menores que 1, entonces $\sum_{i=1}^p \alpha_i <1.
+%     \end{enumerate}
+% \end{problem}
+
+
+
+
+
+\end{document}
