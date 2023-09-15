@@ -708,9 +708,9 @@ El inciso dos se sigue ya que sabemos que la estacionaridad estricta implica la 
 
 
 
-\begin{problem}{6}
-    Sea $X_t$ un proceso estacionario que satisface $X_t+ X_{t-1}= e_t$, $t= 0,\pm1, \pm2,...$ donde $e_t$ es un ruido blanco. Prueba que $X_{t+h} = (-1)^h X_t$ con probabilidad 1.
-\end{problem}
+% \begin{problem}{6}
+%     Sea $X_t$ un proceso estacionario que satisface $X_t+ X_{t-1}= e_t$, $t= 0,\pm1, \pm2,...$ donde $e_t$ es un ruido blanco. Prueba que $X_{t+h} = (-1)^h X_t$ con probabilidad 1.
+% \end{problem}
 
 \begin{problem}{8}
     Descarga el dataset \textit{monthly} desde el site 
@@ -798,6 +798,106 @@ El inciso dos se sigue ya que sabemos que la estacionaridad estricta implica la 
     Demuestra todas las identidades de órdenes de probabilidad que no tienen demostración en las notas.
 \end{problem}
 
+\begin{solution}
+  
+\begin{enumerate}
+  \item Probar 
+  \begin{align*}
+    a_n \rightarrow a < \infty  \Rightarrow a_n = O(n)
+  \end{align*}
+  Por definición de límite, existe un $N$ tal que 
+  \begin{align*}
+    |a_n - a | < \varepsilon
+  \end{align*}
+  para toda $n > N$. Entonces 
+  \begin{align*}
+    -\varepsilon < a_n -a < \varepsilon,\\
+    a - \varepsilon < a_n < a + \varepsilon,\\
+    |a_n| < a + \varepsilon
+  \end{align*}
+    Por tanto, tomando $M = a + \varepsilon$ se obtiene que $a_n$ esta acotada y por tanto es $O(1)$.
+
+    \item 
+    \begin{align*}
+        a_n =  O(f_n), b_n = O(g_n) \Rightarrow a_n + b_n = O(max(f_n,g_n))
+    \end{align*}
+    De las hipotesis tenemos que 
+    \begin{align*}
+      a_n &= O(f_n )   \Rightarrow |a_n  | < M_1 ,\\
+      b_n &= O(g_n )    \Rightarrow |b_n | < M_2 ,\\
+    \end{align*}
+    Entonces,
+    \begin{align*}
+      a_n + b_n < M_1 f_n + M_2g_n
+    \end{align*}
+    Tomando casos, si $f_n < g_n $ entonces 
+    \begin{align*}
+      a_n + b_n < M_1 g_n + M_2 g_n < M g_n 
+    \end{align*}
+    si $f_n > g_n $ entonces
+    \begin{align*}
+      a_n + b_n < M_1 f_n + M_2 g_n < M f_n
+    \end{align*}
+    con $M = max\{M_1,M_2\}$, lo que implica que 
+    \begin{align*}
+      a_n + b_n < M max\{f_n,g_n\} 
+    \end{align*}
+    se sigue lo que se quería probar.
+
+    \item 
+    \begin{align*}
+      a_n =  O(f_n), b_n = O(g_n) \Rightarrow a_n - b_n = O(max(f_n,g_n))
+    \end{align*}
+
+    De manera análoga al anterior obtenemos las mismas cotas que el inciso previo. Así, tenemos que 
+    \begin{align*}
+      a_n - b_n = M_1 f_n - M_2 g_n 
+    \end{align*}
+    si $f_n < g_n$ entonces 
+    \begin{align*}
+      a_n - b_n = M max\{ f_n, g_n  \}
+    \end{align*}
+    lo que significa
+    \begin{align*}
+      a_n - b_n = O(max\{f_n, g_n \})
+    \end{align*}
+
+    \item  
+    \begin{align*}
+      a_n =  O(f_n), \:\:\:\:\: b_n = O(g_n) \:\:\:\:\: \Rightarrow a_n b_n O(f_ng_n )
+    \end{align*}
+    directamente de la hipótesis
+    \begin{align*}
+      |a_n b_n| = |a_n| |b_n| < M1f_n M_2 g_n
+    \end{align*}
+    tomando $M = M_1 M_2 $ se sigue que 
+    \begin{align*}
+      |a_n b_n| < Mf_n g_n
+    \end{align*}
+    Por tanto, $a_nb_n = O(f_n g_n )$.
+
+    \item 
+    \begin{align*}
+      a_n =  O(f_n)  \:\:\:\:\: \Rightarrow a_n^s = O(f_n^s)
+    \end{align*}
+    Análogamente,
+    \begin{align*}
+      |a_n^s| = |a_n| ^s < M_1^s f_n^s
+    \end{align*}
+    tomando $M = M_1^s$ se sigue el resultado.
+
+
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+\end{solution}
 
 
 \end{document}
