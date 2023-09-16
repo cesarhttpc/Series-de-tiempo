@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1694821447 "c:/Users/ce_ra/Documents/CIMAT/Semestres/Tercero/Series Tiempo/Series de tiempo/Tarea2/Tarea2.tex" "build/Tarea2.pdf" "Tarea2" 1694821450 0
+["pdflatex"] 1694823928 "c:/Users/ce_ra/Documents/CIMAT/Semestres/Tercero/Series Tiempo/Series de tiempo/Tarea2/Tarea2.tex" "build/Tarea2.pdf" "Tarea2" 1694823931 0
   "C:/Users/ce_ra/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1693352630 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/ce_ra/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1693352273 24120579 85898b25958cf632ec7946174c56943b ""
   "C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -213,10 +213,10 @@
   "C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-abspage.sty" 1650051284 2245 c8a4088d07cffc2e5207730c738edd76 ""
   "C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-base.sty" 1650051284 20785 71a3d72ab517959a6979c27e6176bec1 ""
   "Figures/EscudoCimat.png" 1694016590 23978 afd125464800623154e6cd8f9742e14b ""
-  "Tarea2.tex" 1694821446 6645 48e6c3d9930e9fcbd12da678fcafba65 ""
-  "build/Tarea2.aux" 1694821450 751 cce19e6e1c4bdfd0bf6fd879ec1a77e6 "pdflatex"
-  "build/Tarea2.out" 1694821450 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "c:/Users/ce_ra/Documents/CIMAT/Semestres/Tercero/Series Tiempo/Series de tiempo/Tarea2/Tarea2.tex" 1694821446 6645 48e6c3d9930e9fcbd12da678fcafba65 ""
+  "Tarea2.tex" 1694823927 6632 36c7d9ed2658ee7a5baf5d805303b480 ""
+  "build/Tarea2.aux" 1694823930 751 cce19e6e1c4bdfd0bf6fd879ec1a77e6 "pdflatex"
+  "build/Tarea2.out" 1694823930 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "c:/Users/ce_ra/Documents/CIMAT/Semestres/Tercero/Series Tiempo/Series de tiempo/Tarea2/Tarea2.tex" 1694823927 6632 36c7d9ed2658ee7a5baf5d805303b480 ""
   (generated)
   "build/Tarea2.aux"
   "build/Tarea2.log"
