@@ -160,7 +160,7 @@
     con $\beta_0,\beta_1$ fijos y $\{e_t: t\in \mathbb{N}\cup \{0\} \} $ distribuidas $N(0,sigma^2)$ Construye la media y la función de covarianza para $Y_t$.
 \end{problem}
 
-\begin{problem}
+\begin{problem}{3}
     Sean $X_i \sim N(0, \sigma^2) \: \: i = 1,2,\cdots$ independientes y sea $\bar{X}_n = n^{-1} \sum _{i=1}^n X_i .$
     \begin{enumerate}
         \item Se sabe que $\mu \neq 0$. ?` Cómo aproximarías la distribución de $\bar{X}_n^2 $ en muestras grandes? 
@@ -183,6 +183,28 @@
 \end{problem}
 
 
+\begin{problem}{6} 
+    Mostrar que, si $\lambda > 0 \beta \geq 0$ y $p$ es un entero no negativo, entonces $\exists M $ tal que 
+    \begin{align*}
+        (t+1)^p \beta^t < M \lambda^t \:\:\:\:\:\: \forall t \geq 0.    
+    \end{align*}
+\end{problem}
+
+\begin{problem}{7} 
+    Sea $Y_t$ un proceso autoregresivo de orden $p$
+    \begin{align*}
+        Y_t = \theta + \sum_{i = 1}^{p } \alpha_i Y_{t-i } + e_t = \mu + \sum_{i=0}^{\infty} w_i e_{t-i }
+    \end{align*}
+    donde $\mu = \mathbb{E}[Y_t ]$, $\omega_0 = 1$; $ \omega_i = 0  i < 0$ y $\omega_j = \sum_{i=1}^{p } \alpha_i \omega_{j-i }, j = 1,2,\cdots. $ Supongamos que $\sum_{i=1}^{\infty} |\omega_j| < \infty $ (en este caso se puede mostrar que $|\omega _j| < M \lambda^j, \lambda <1) $. 
+\end{problem}
+
+\begin{problem}{9} 
+    En este ejercicio volveremos a emplear los datos de temperatura de la Tarea 1. 
+    \begin{enumerate}
+        \item Ajusta un modelo AR(4) a la serie del promedio de la temperatira golbal anual y usando el modelo ajustado crea una serie de valores estimados por el modelo de $t = 2 $ al último valor en la serie. Crea una serie residual de la diferencia entre el valor estimado y el valor observado. 
+        \item Grafica el correlograma para la serie del promedio de la temperatura global anual. Comenta.
+    \end{enumerate}
+\end{problem}
 
 
 
