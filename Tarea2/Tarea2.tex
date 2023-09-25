@@ -101,7 +101,7 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	\begin{minipage}[b][1.2cm][t]{0.8\textwidth}
-		\large\textbf{César Isaí García Cornejo} \hfill \textbf{Tarea 1}  \\
+		\large\textbf{César Isaí García Cornejo} \hfill \textbf{Tarea 2}  \\
 		cesar.cornejo@cimat.mx \hfill \\
 		\normalsize Series de Tiempo \hfill Semestre 3\\
 	\end{minipage}
@@ -140,13 +140,91 @@
 
     La raíz de la ecuación característica de la ecuación en diferencias sociada a $Y_t = 2 Y_{t-1} + v_{t }$ es 2 (i.e. es mayor que uno). Entonces, para $ Y_t = \alpha_1 Y_{t-1} + v_t$, las condiciones $v_t$ no-correlacionadas $(0, \sigma^2_v )$ y $|a_1| > 1$ no implican que $Y_t$ es no-estacionario.
 
-    En este ejemplo preferimos la representacion $Y_t = \frac{1}{2}Y_{t-1} + v_t$ pues, como demostrarás en $a)-c)$, el error tiene menor varianza y no está correlacionado con 
-    
-    
-    
-    
+    En este ejemplo preferimos la representacion $Y_t = \frac{1}{2}Y_{t-1} + v_t$ pues, como demostrarás en $a)-c)$, el error tiene menor varianza y no está correlacionado con $Y_{t-1}$ y permite escribir a $Y_t$ como un $MA(\infty)$.
     
 \end{problem}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Tenemos dos representaciones para AR(1). La primer propuesta es 
+        \begin{align}
+            Y_t = \frac{1}{2} Y_{t-1} +e_t 
+            \label{1.01}
+        \end{align}
+        y deseamos contrastar con la representación 
+        \begin{align}
+            Y_t = 2Y_{t-1} + \nu_t 
+            \label{1.02}
+        \end{align}
+        Es necesario probar que $\nu_t$ es efectivamente un ruido blanco. Por ello, verifiquemos que $\nu_t$ es no correlacionado.
+        \begin{align*}
+            Cov(v_t, v_{t+h}) &= Cov(Y_t - 2Y_{t-1}, Y_{t+h } - 2Y_{t+h -1}),\\ 
+            &= Cov(Y_t,Y_{t+h }) -2 Cov(Y_t,Y_{t+h-1} ) - 2Cov(Y_{t-1}, Y_{t+h }) - 4Cov(Y_{t-1}, Y_{t+h-1})
+        \end{align*}
+        Recordando que para un $AR(1)$ 
+        \begin{align*}
+            Y_t =  \phi Y_{t-1} + e_t 
+        \end{align*}
+        tenemos que su covarianza es
+        \begin{align}
+            Cov(Y_t,Y_{t+k }) = \frac{\sigma^2 \phi^k }{1-\phi^2}
+            \label{1.1}
+        \end{align}
+        Por tanto, con $\phi = 1/2$
+        \begin{align*}
+            Cov(Y_t, Y_{t+h }) &= \frac{\sigma^2 \left(\frac{1}{2}\right)^h}{\frac{3}{4}} - 2 \frac{\sigma^2 \left(\frac{1}{2}\right)^{h-1}}{\frac{3}{4}} -2 \frac{\sigma^2 \left(\frac{1}{2}\right)^{h+1}}{\frac{3}{4}} + 4 \frac{\sigma^2 \left(\frac{1}{2}\right)^h}{\frac{3}{4}},\\ 
+            &= \frac{4\sigma^2}{3}\left(\frac{1}{2}\right) ^{h-1}\left[ \left(\frac{1}{2}\right) -2  -2 \left(\frac{1}{2}\right) ^{2} + 4\left(\frac{1}{2}\right)\right] ,\\ 
+            &= \frac{4\sigma^2}{3}\left(\frac{1}{2}\right) ^{h-1}\left[ \left(\frac{1}{2}\right) -2  -\left(\frac{1}{2}\right)  + 2\right] ,\\ 
+            &= 0.
+        \end{align*}
+        Para la varianza
+        \begin{align*}
+            \mathbb{V}ar[\nu_t ] = Cov(\nu_t,\nu_t ) = \frac{4\sigma^2}{3} > \sigma^2 = \mathbb{V}ar[e_t]
+        \end{align*}
+        donde se usó (\ref{1.1}). Por tanto, la representación (\ref{1.02}) tiene más varianza que la representacion (\ref{1.01}).
+        \item Si el modelo AR(1) es invertible (\ref{1.01}) entonces iterando (\ref{1.01}) $k$ veces 
+        \begin{align*}
+            Y_t &= \frac{1}{2}Y_{t-1} + e_t ,\\ 
+            &= \frac{1}{2}\left( Y_{t-2} + e_{t-1}\right) + e_t ,\\
+            &= e_t + \frac{1}{2} e_{t-1} + \frac{1}{2} Y_{t-2}, \\ 
+            &= e_t + \frac{1}{2} e_{t-1} + \left(\frac{1}{2}\right)^2 e_{t-2} + \cdots + \left(\frac{1}{2}\right)^k e_{t-k } + \left(\frac{1}{2}\right)^{k+1} Y_{t-k-1}
+        \end{align*}
+        vemos que converge en $L^2$ 
+        \begin{align*}
+            \mathbb{E}\left [\left |Y_t - \sum_{j=0}^{k}\phi^j e_{t-j}\right |^2\right ] &= \mathbb{E}\left [ \left | \left (\frac{1}{2}  \right )^{k+1} Y_{t-k-1}\right |^2\right ] ,\\ 
+            &= \left (\frac{1}{2}  \right )^{2k+2}\mathbb{E}\left [ \left |  Y_{t-k-1}\right |^2\right ] ,\\ 
+            & \overset{k\rightarrow \infty}{\rightarrow} 0
+        \end{align*}
+        Entonce se satisface
+        \begin{align}
+            Y_t = \sum_{j=0}^{\infty}\phi^j e_{t-j}
+            \label{1.03}
+        \end{align}
+        casi seguramente. Es decir, si $|\phi| < 1$ podemos expresar el modelo $AR(1)$ como una media movil infinito $MA(\infty)$. 
+
+        Finalmente, es directo que
+        \begin{align*}
+            Cov(e_t, Y_{t-1}) &= Cov\left(e_t\:, \sum_{j=0}^{\infty}\phi^j e_{t-j-1}\right),\\ 
+            &= 0.
+        \end{align*}
+        ya que la covarianza se aplica entre $e_t$ y valores $e_k$ donde $k$ es menor que $t$. 
+
+        Posteriormente se muestra que existe covarianza entre $\nu_t$ y $Y_{t-1}$ 
+        \begin{align*}
+            Cov(\nu_t, Y_{t-1}) &= Cov( Y_t - 2 Y_{t-1}, Y_{t-1}),\\ 
+            &= Cov(Y_t,Y_{t-1}) - 2Cov(Y_{t-1}, Y_{t-1} ),\\ 
+            &= \frac{\sigma^2 \frac{1}{2}}{\frac{3}{4}} -2 \frac{\sigma^2}{\frac{3}{4}},\\
+            &= \frac{4\sigma^2}{3 }\left(\frac{1}{2}- 2\right) ,\\ 
+            &= -2\sigma^2.
+        \end{align*}
+        por tanto, las variables involucradas están correlacionadas.
+
+        \item Este último ya se ha resuelto en (\ref{1.03}) pues se expresó $Y_t$ como un $MA(\infty)$.
+
+    \end{enumerate}
+        
+\end{solution}
+
 
 \begin{problem}{2}
     Sea $Y_t$ una serie de tiempo definida como 
@@ -157,8 +235,56 @@
     \begin{align*}
         X_t = e_t + 0.6 e_{t-1},
     \end{align*}
-    con $\beta_0,\beta_1$ fijos y $\{e_t: t\in \mathbb{N}\cup \{0\} \} $ distribuidas $N(0,sigma^2)$ Construye la media y la función de covarianza para $Y_t$.
+    con $\beta_0,\beta_1$ fijos y $\{e_t: t\in \mathbb{N}\cup \{0\} \} $ distribuidas $N(0,\sigma^2)$ Construye la media y la función de covarianza para $Y_t$.
 \end{problem}
+
+\begin{solution}
+    Haciendo el calculo directamente
+    \begin{align*}
+        \mathbb{E}[Y_t] &= \mathbb{E}[\beta_0 + \beta_1 t +X_t ], \\
+        &= \beta_0 + \beta_1 t \mathbb{E}[X_t ],
+    \end{align*}
+    entonces, es necesario calcular la esperanza para $X_t$ 
+    \begin{align*}
+        \mathbb{E}[X_t ] = \mathbb{E}[e_t ] + (0.6)\mathbb{E}[e_{t-1}] = 0.
+    \end{align*}
+    Para la covarianza $Cov(Y_t,Y_{t+k })$, discriminamos por casos. Para $k= 0$ 
+    \begin{align*}
+        Cov(Y_t, Y_{t} ) &= \mathbb{V}ar[Y_t ] ,\\ &= \mathbb{V}ar[\beta _ 0 + \beta_1 t + X_t ],\\
+        &= \mathbb{V}ar[X_t ]
+    \end{align*}
+    luego, como $e_t $ son no correlacionados
+    \begin{align*}
+        \mathbb{V}ar[X_t ]  &= \mathbb{V}ar[e_t + (\text{0.6})e_{t-1}] ,\\ 
+        &= \mathbb{V}ar[e_t] + (\text{0.6})^2 \mathbb{V}ar[e_{t-1}],\\ 
+        &= \sigma^2(1+ (\text{0.6})^2),\\
+        &= \text{1.36}\sigma^2 
+    \end{align*}
+    para $k = 1$ 
+    \begin{align*}
+        Cov(Y_t , Y_{t+1}) &= Cov(\beta_0 + \beta_1 t + X_t,\beta_0 + \beta_1 (t+1) + X_{t+1}) ,\\ 
+        &= Cov(X_t, X_{t+1}),\\ 
+        &= Cov(e_t + \text{0.6}e_{t-1}, e_{t+1} + \text{0.6}e_t ),\\ 
+        &= Cov(e_t, \text{0.6} e_t),\\  
+        &= \text{0.6}\sigma ^2 
+    \end{align*}
+    para $k= -1$ es similar al anterior 
+    \begin{align*}
+        Cov(Y_t, Y_{t-1}) &= Cov(X_t, X_{t-1}) ,\\
+        &= Cov(e_t + \text{0.6}e_{t-1}, e_{t-1} + \text{0.6}e_{t-2}),\\
+        &= \text{0.6}\sigma^2
+    \end{align*}
+    para los otros casos todos los términos son no correlacionados. Así,
+    \begin{align*}
+        Cov(Y_t, Y_{t+k}) = \left\{\begin{matrix}
+            \text{1.36}\sigma^2 & k = 0\\ 
+            \text{0.6}\sigma^2 & |k| = 1 \\ 
+            0 & e.o.c 
+            \end{matrix}\right.
+    \end{align*}
+    lo que concluye el ejercicio.
+\end{solution}
+
 
 \begin{problem}{3}
     Sean $X_i \sim N(0, \sigma^2) \: \: i = 1,2,\cdots$ independientes y sea $\bar{X}_n = n^{-1} \sum _{i=1}^n X_i .$
@@ -170,18 +296,200 @@
     Explica con detalle los procedimientos y asegúrate de que no se den distribuciones límites degenerads. Este ejercicio es para recordar los procedimientos más básicos para variables aleatorias.
 \end{problem}
 
+\begin{solution}
+
+    \begin{enumerate}
+        \item 
+        Dado que nos pide una aproximación a los estadísticos dados, precindiremos en está parte que $X_i \sim N(0,\sigma^2)$ pues citaremos el Teorema de Límite Central y dicha hipótesis no es necesaria. Entonces, por TLC tenemos que
+        \begin{align*}
+            \sqrt{n}(\bar{X }_n - \mu) \sim N(0,\sigma^2)
+        \end{align*}
+        o lo que es lo mismo
+        \begin{align*}
+            \bar{X }_n \sim N \left(0, \frac{\sigma^2}{n }\right)
+        \end{align*}
+        para $n$ relativamente grandes. Luego, el método delta nos dice que para una transformación $g(X)$ diferenciable tal que $g'(x) \neq 0 $. Entonces
+        \begin{align*}
+            \sqrt{n}(g(\bar{X }_n) - g(\mu)) \sim N \left( 0, \left(g'(\mu)\right)^2\sigma^2\right) 
+        \end{align*}
+    En nuestro caso, es de interes la transformación $g(x) = x^2$. Por lo que la varianza se reescala por el factor $g'(x) = 2x$ teniendo la siguiente aproximación
+    \begin{align*}
+        \sqrt{n}\left(\bar{X }_n^2 - \mu^2\right) \sim N\left(0, 4\mu^2 \sigma^2\right)
+    \end{align*}
+    o lo que es lo mismo
+    \begin{align*}
+        \bar{X }_n^2 \sim N\left(\mu^2,\frac{4\mu^2 \sigma^2}{n }\right)
+    \end{align*}
+    notemos que el método delta pide que $g'(\mu) = 2\mu \neq 0$
+    por lo que es necesario pedir que $\mu \neq 0$.
+
+    \item Para el caso $\mu = 0$ no es posible aplicar el método delta. Sin embargo, podemos usar el teorema de cambio de variable donde ahora si contemplamos la hipótesis de sobre la distibución de $X_i$. Entonces, sabemos que
+    \begin{align}
+        \frac{\sqrt{n}\bar{X }_n}{\sigma} \sim N(0,1)
+        \label{3.02}
+    \end{align}
+    denotemos $Z = \frac{\sqrt{n}\bar{X }_n}{\sigma}$. Es un resultado conocido que $Z^2 \sim \chi^2 (1)$ que es la distribución ji-cuadrada con un grado de libertad. 
+    
+    
+    Este último resultado se obtiene fácilmente de 
+    \begin{align*}
+        \mathbb{P}(Z^2 \leq t ) &= \mathbb{P}\left (|Z| \leq \sqrt{t}  \right ) = \mathbb{P}\left (-\sqrt{t } \leq Z \leq \sqrt{t }  \right ),\\ 
+        &= F_Z(\sqrt{t } ) - F_Z(-\sqrt{t }) = F_Z(\sqrt{t }) - \left(1-F_Z(\sqrt{t })\right)   = 2 F_Z(\sqrt{t }) -1 , 
+    \end{align*}
+    se sigue que la densidad es
+    \begin{align*}
+        f_Z(t ) &= 2 \frac{d }{dt } F_Z(\sqrt{t }) = 2  \frac{d }{dt }\left(\int_{-\infty}^{\sqrt{t}} \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} dx  \right),\\
+        &= 2 \frac{1}{2\pi} e^{-\frac{t}{2}} \frac{1}{2\sqrt{t }} ,\\
+        &= \frac{1}{2^{1/2}\Gamma\left(\frac{1}{2}\right)} t^{-\frac{1}{2}} e^{-\frac{t }{2}}
+    \end{align*}
+    que es la densidad de la ji-cuadrada con un grado de libertad. Hasta ahora hemos visto que 
+    \begin{align*}
+        Z^2 = \frac{n \bar{X }^2}{\sigma^2} \sim \chi^2(1)
+    \end{align*}
+    sin embargo queremos conocer la distribución de $\bar{X }^2_n$ solamente. Para ello, utilizamos el teorema de transformación de variables aleatorias. Denotemos por $X = Z^2$.  Sea $U = \frac{\sigma^2}{n} X$. Entonces la densidad transformada será 
+    \begin{align*}
+        f_U(u ) = f_{X} (x(u )) \left | \frac{d x(u)}{du} \right |
+    \end{align*}
+    donde $x(u) = \frac{nu }{\sigma^2}$ . Así,
+    \begin{align*}
+        f_U(u ) &=  \frac{1}{2^{1/2}\Gamma\left(\frac{1}{2}\right)} \left(\frac{n u }{\sigma^2 }\right)^{-\frac{1}{2}} e^{-\frac{1}{2}\left(\frac{nu }{\sigma^2}\right)}\frac{n }{\sigma^2},\\ 
+        &= \frac{n}{\sqrt{2\pi }\sigma^2} \left(\frac{\sigma^2}{n }\right)^{1/2} u^{-1/2} e^{-\frac{u}{2\sigma^2/n}},\\ 
+        &= \frac{1}{\sqrt{2\pi u \sigma^2 /n }} e^{-\frac{u }{2\sigma^2/n}}
+    \end{align*}
+    que no es una distribución concocida más que una transformación de una distribución ji-cuadrada.
+
+    \item El supuesto de independencia es vital para usar el Teorema del límite central que se uso el el caso $\mu \neq 0$. Sin dicho supuesto tampoco podemos afirmar (\ref{3.02}) y tampo hay distribución aproximada para $\mu = 0$. Luego, se requieren otros supuesto como lo es la condición de linderberg-feller, donde el Teorema de Linderberg Feller permite una dependencia \textit{débil}. Existen otros acercamientos que generalizan el Teorema de Límite Central. Sin embargo dichos teoremas salen de los propositos establecidos.
+
+\end{enumerate}
+
+\end{solution}
+
+
 \begin{problem}{4}
-    Monstrar que si $m^p + a_1 m^{p-1} + \cdots + a_p = 0 $ tiene todas sus raíces menores que uno en módulo, entonces $1+ a_1 q + \cdots + a_p q^p = 0$ tiene todas sus raíces mayoures que uno en módulo. \textit{Hint: si r es una raíz del primer polinomio, es ?` es 1/r una raíz del segundo?}    
+    Monstrar que si $m^p + a_1 m^{p-1} + \cdots + a_p = 0 $ tiene todas sus raíces menores que uno en módulo, entonces $1+ a_1 q + \cdots + a_p q^p = 0$ tiene todas sus raíces mayores que uno en módulo. \textit{Hint: si r es una raíz del primer polinomio, ?` es 1/r una raíz del segundo?}    
 \end{problem}
+
+\begin{solution}
+
+    Bajo manipulación algebraica. Las raíces de
+    \begin{align*}
+        m^p + a_1 m^{m-1} + \cdots + a_p = 0
+    \end{align*}
+    denotadas por $m_1, \cdots, m_p $, son las mismas que 
+    \begin{align*}
+        \frac{1}{m^p} \left(  m^p + a_1 m^{m-1} + \cdots + a_p       \right) = 0
+    \end{align*}
+    siempre que $m=0$ no sea solución. Así,
+    \begin{align*}
+        1+ a_1\frac{1}{m } + a_2 \frac{1}{m^2} + \cdots + a_p \frac{1}{m^p }  = 0
+    \end{align*}
+    con la transformación $q = 1/m$ se sigue
+    \begin{align}
+        1 + a_1 q + a_2 q^2 + \cdots + a_p q ^p = 0
+        \label{4.2}
+    \end{align}
+
+    Entonces cada raíz de (\ref{4.2}) satisface que $q_i = \frac{1}{m_i }$. Se sigue que si $|m_i| < 1$ entonces $|q_i| > 1$ para $i = 1,\cdots, p$. 
+\end{solution}
 
 \begin{problem}{5}
     Si $m_1, \cdots, m_p$ son las raíces de $ m^p - \sum _{i=1}^p \alpha_i m^{p-i} =  0$, entonces
     \begin{enumerate}
         \item $\sum _{i=1}^p \alpha_i = 1$ si y sólo si al menos una raíz es igual a 1.
         \item Si todas las raíces en módulo son menores que 1, entonces $\sum_{i=1}^p \alpha_i <1$.
+        \item Mostrar que 
+        \begin{align*}
+            \prod _{i = 1}^p (1 - m_i x )  = 1 - \sum_{i=1}^p \alpha_i x_i 
+        \end{align*}
+        para todo $x$.
+        \item Interpretar el resultado.
     \end{enumerate}
 \end{problem}
 
+
+
+\begin{solution}
+    \begin{enumerate}
+        \item Consideremos la ecuación polinomica para sus respectivas raíces
+        \begin{align*}
+            m^p - \sum _{i=1}^p \alpha_i m^{p-i} =  0.
+        \end{align*}
+        Observemos las siguientes equivalencias
+        \begin{align*}
+            \exists j \in \{ 1, \cdots, p  \} \:\: \text{tal que}  \:\: m_j = 1  \:\: &\iff m_j^p - \sum _{i=1}^p \alpha_i m_j^{p-i} =  0\\ 
+            & \iff 1 - \sum _{i=1}^p \alpha_i = 0\\ 
+            & \iff \sum _{i=1}^p \alpha_i = 1
+        \end{align*}
+        Notese que la doble implicación es cierta. La implicación trivial es $(\Longrightarrow)$ ya que solo es la evaluación del polinomio. La implicación $(\Longleftarrow)$ es cierta por contraposición lógica. Si $\sum \alpha_i \neq $ entonces no existe ninguna solución $m_j = 1$.
+
+        \item Como $|m_j| < 1 $ para todo $j \in \{ 1, \cdots, p\}$ entonces
+        \begin{align*}
+            0 &= m^p - \sum_{i=1}^p  \alpha_i m^{p-i} , \\ 
+            0 & = 1 -  \sum_{i=1}^p \alpha_i m^{-i} ,\\  
+        \end{align*}
+        como 
+        \begin{align*}
+            |m_j| &< 1 ,\\
+            \frac{1}{|m_j|} &> 1 ,\\ 
+            -\frac{1}{|m_j|} & < -1 
+        \end{align*}
+        se sigue que
+        \begin{align*}
+            0 = 1 - \sum_{i = 1}^p \alpha _i m^{-i } < 1 - \sum_{i=1}^p \alpha_i 
+        \end{align*}
+        lo que implica que
+        \begin{align*}
+            \sum_{i=1}^p \alpha_i < 1
+        \end{align*}
+
+        \item Observemos que $m_1, \cdots, m_p$ son raíces de 
+        \begin{align*}
+            0 &= x^p - \sum_{i=1}^{p} \alpha_i x^{p-i },\\
+            0 &= x^p - \alpha_1 x^{p-1} - \alpha_2 x^{p-2} - \cdots - \alpha_p 
+        \end{align*}
+        por el ejercicio 4) sabemos que $\frac{1}{m_1},\cdots, \frac{1}{m_p}$ son raíces de
+        \begin{align*}
+            0 = 1- \alpha_1 x - \cdots - \alpha_p x^p 
+        \end{align*}
+        Por otro lado, por el Teorema Fundamental del algebra, podemos construir un polinomio con las mismas raíces $q_i = 1/m_i$ de la forma que
+        \begin{align*}
+            \prod_{i = 1}^{p } \left(q_i  - x \right) = \prod_{i = 1}^{p } \left(\frac{1}{m_i } - x \right) = \prod_{i = 1}^{p } \left(\frac{1-m_i x }{m_i } \right) 
+        \end{align*}
+        es decir
+        \begin{align*}
+           0 = 1 - \sum_{i = 1}^{p} \alpha_i x^i = \prod_{i = 1}^{p } \left(\frac{1-m_i x }{m_i } \right) = \prod_{i=1}^{p } \left( 1- m_i x \right)
+        \end{align*}
+        es decir existe una constante $K$ tal que
+        \begin{align*}
+            1 - \sum_{i = 1}^{p} \alpha_i x^i  = K \prod_{i=1}^{p } \left( 1- m_i x \right)
+        \end{align*}
+        que desarrollando vemos que el término lineal del miembro derecho es K mientras que en el lado izquierdo es 1. Luego, por independecia lineal entre los términos se sigue que $K= 1$. 
+        \begin{align*}
+            1 - \sum_{i = 1}^{p} \alpha_i x^i  =  \prod_{i=1}^{p } \left( 1- m_i x \right)
+        \end{align*}
+        lo que concluye el inciso.
+        \item Veamos que el polinomio $\phi(x) = 1 - \sum_{i = 0}^{p} \alpha_i  x_i$ es el polinomio característico de un AR(p) bajo el operador de translación $B$ en la forma 
+        \begin{align*}
+            \phi(B ) Y_t = e_t 
+        \end{align*}
+        por tanto, tenemos una relación práctica para saber si se puede invertir $Y_t$ como un $MA(\infty)$.
+
+
+        
+    \end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{solution}
 
 \begin{problem}{6} 
     Mostrar que, si $\lambda > 0 \beta \geq 0$ y $p$ es un entero no negativo, entonces $\exists M $ tal que 
@@ -190,21 +498,105 @@
     \end{align*}
 \end{problem}
 
+\begin{solution}
+    Como $\lambda > \beta$ entonces $\lambda/\beta > 1$ y podemos escribir
+    \begin{align*}
+        \left(t + 1\right)^p < M \left(\frac{\lambda}{\beta}\right)^{t }    
+    \end{align*}
+    que en el miembro derecho tenemos una exponencial, por lo que cambiando la base
+    \begin{align*}
+        \left(t+1\right)^p <  M e^{t\log(\frac{\lambda}{\beta})}
+    \end{align*}
+    que es lo que se desea mostrar. 
+
+    La primera observación es considerando que la exponencial tiene un crecimiento de mayor orden, es decir, si $f(t ) = (t+1 )^p $ y $g(t) = e^{t\log\left(\frac{\lambda}{\beta}\right)} $
+    \begin{align*}
+        \lim_{t \rightarrow \infty} \frac{f(t)}{g(t )} = 0.
+    \end{align*}
+    Entonces existe un $T$ para el cual la exponencial domina al polinomio para valores $t \geq T$. Es decir
+    \begin{align*}
+        \frac{f(t )}{g(t )} < M_2 
+    \end{align*}
+    donde $M_2 = \frac{f(T )}{g(T)} + 1$ ya que el crecimiento exponencial es monotono.
+
+    Por otro lado, para valore de $t \in [0, T)$. Como el polinomio es función continua, y $g(t)$ es mayor que uno, no hay indeterminaciones y el supremo del cociente se alcanza. Sea $M_2 = sup_{t \in [0,T)}\{\frac{f(t )}{g(t )} \} +1$. La prueba se concluye tomando $M = max\{M_1,M_2\}$.
+
+\end{solution}
+
+
 \begin{problem}{7} 
     Sea $Y_t$ un proceso autoregresivo de orden $p$
     \begin{align*}
         Y_t = \theta + \sum_{i = 1}^{p } \alpha_i Y_{t-i } + e_t = \mu + \sum_{i=0}^{\infty} w_i e_{t-i }
     \end{align*}
     donde $\mu = \mathbb{E}[Y_t ]$, $\omega_0 = 1$; $ \omega_i = 0  i < 0$ y $\omega_j = \sum_{i=1}^{p } \alpha_i \omega_{j-i }, j = 1,2,\cdots. $ Supongamos que $\sum_{i=1}^{\infty} |\omega_j| < \infty $ (en este caso se puede mostrar que $|\omega _j| < M \lambda^j, \lambda <1) $. 
+
+    \begin{enumerate}
+        \item Mostrar que
+        \begin{align*}
+            \sum_{i= 0}^{\infty} w_i = \left(1-\sum_{i=1}^{p} \alpha_i \right)^{-1}
+        \end{align*}
+        \item Comenta como esste resultado puede usarse en la práctica para estimar los coeficientes de un $AR(p)$ estacionario.
+    \end{enumerate}
+
+
 \end{problem}
 
-\begin{problem}{9} 
-    En este ejercicio volveremos a emplear los datos de temperatura de la Tarea 1. 
+
+\begin{solution}
+
     \begin{enumerate}
-        \item Ajusta un modelo AR(4) a la serie del promedio de la temperatira golbal anual y usando el modelo ajustado crea una serie de valores estimados por el modelo de $t = 2 $ al último valor en la serie. Crea una serie residual de la diferencia entre el valor estimado y el valor observado. 
-        \item Grafica el correlograma para la serie del promedio de la temperatura global anual. Comenta.
+        \item Directamente calculando la suma 
+        \begin{align*}
+            \sum_{j = 0}^{\infty} w_j &= 1 + \sum_{j= 1}^{\infty} w_j,\\ 
+            &= 1 + \sum_{j = 1}^{\infty} \sum_{i=1}^{p } \alpha_i w_{j-i}
+        \end{align*}
+        notemos que la suma interna en realidad suma desde $i$ hasta el mínimo de $p$ y $j$ ya que de lo contrario, para $i$ mayores que $j$, $j-i <0$ y los términos $w_{j-i } = 0$ por hipótesis. Entonces,
+        \begin{align*}
+            \sum_{j = 0}^{\infty} w_j &= 1 + \sum_{j=1}^{\infty} \sum_{i=1}^{p\land j} \alpha_i w_{j-i}
+        \end{align*}
+        Por el Teorema de Fubbini, podemos intercambiar el orden de las sumas. Por un análisis de los índices dicho cambio se torna en 
+        \begin{align*}
+            \sum_{j = 0}^{\infty} w_j &= 1 + \sum_{i = 1}^{p} \sum_{j=i }^{\infty} \alpha_i w_{j-i} ,\\
+            &= 1 + \sum_{i=1}^{p }\alpha_i \sum_{j=i }^{\infty} w_{j-i },\\ 
+            &= 1 + \sum_{i = 1}^{p} \alpha_i \sum_{j=0}^{\infty}w_{j }.
+        \end{align*}
+        Despejando
+        \begin{align*}
+            \sum_{j=0}^{\infty} w_j - \sum_{i=1}^{p }\alpha_i \sum_{j=0}^{\infty} w_j &= 1,\\ 
+            \sum_{j=0}^{\infty} w_j \left(1-\sum_{i=1}^{p } \alpha_i\right) &=1,
+        \end{align*}
+        por tanto
+        \begin{align*}
+            \sum_{j=0}^{\infty} w_j &= \left(1-\sum_{i=1}^{p } \alpha_i \right) ^{-1}
+        \end{align*}
+        que es lo que se deseaba mostrar.
+
+        \item Hagamos la primer observación. Si el AR(p) se construye con un polinomio característico 
+        \begin{align*}
+            \phi(B)= \left( 1 - \sum_{i= 1}^{p } \alpha_i B^i\right)
+        \end{align*}
+        de forma $\phi(B)Y_t = e_t$. Por lo visto en los problemas 4 y 5, tenemos que $Y_t$ es inverible si $\sum \alpha_i <1 $ por tanto
+        \begin{align*}
+            \left(1-\sum_{i=1}^{p } \alpha_i \right) ^{-1} < \infty
+        \end{align*}
+        lo que implica que
+        \begin{align*}
+            \sum_{j=0}^{\infty} w_j < \infty 
+        \end{align*}
+        una representacion de $MA(\infty)$ convergente y causal.
     \end{enumerate}
-\end{problem}
+
+
+\end{solution}
+
+% \begin{problem}{9} 
+%     En este ejercicio volveremos a emplear los datos de temperatura de la Tarea 1. 
+%     \begin{enumerate}
+%         \item Ajusta un modelo AR(4) a la serie del promedio de la temperatira global anual y usando el modelo ajustado crea una serie de valores estimados por el modelo de $t = 2 $ al último valor en la serie. Crea una serie residual de la diferencia entre el valor estimado y el valor observado. 
+%         \item Grafica el correlograma para la serie del promedio de la temperatura global anual. Comenta.
+%     \end{enumerate}
+% \end{problem}
 
 
 
