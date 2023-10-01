@@ -101,7 +101,7 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	\begin{minipage}[b][1.2cm][t]{0.8\textwidth}
-		\large\textbf{César Isaí García Cornejo} \hfill \textbf{A systematic review of Python}  \\
+		\large\textbf{César Isaí García Cornejo} \hfill \textbf{A systematic review of Python...}  \\
 		cesar.cornejo@cimat.mx \hfill \\
 		\normalsize Series de Tiempo \hfill Semestre 3\\
 	\end{minipage}
@@ -193,13 +193,61 @@ Para contestar la primer pregunta de investigación, primeramente se revizarion 
 Definición de los cometidos
 \begin{enumerate}
     \item \textbf{Indexing: } Dada una serie de tiempo y algunas similitudes de medida, encuentra la serie de tiempo más cercana.
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width = 10 cm]{Figures/T8.png} 
+        % \caption{}
+        \label{Fig. 1}
+    \end{figure} 
     \item \textbf{clustering: } Encuentra grupos de series temporales similares.
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width = 10 cm]{Figures/T3.png} 
+        % \caption{}      
+        \label{Fig. 2}
+    \end{figure} 
     \item \textbf{clasificación: } Asigna a cada serie temportal una clase predefinida.
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width = 10 cm]{Figures/T2.png } 
+        % \caption{}
+        \label{Fig. 3}
+    \end{figure} 
     \item \textbf{Segmentación: } Crea una aproximación precisa de una serie temporal por reducción de su dimensión mientras retiene carácteristicas especiales.
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width = 10 cm ]{Figures/T5.png} 
+        % \caption{}
+        \label{Fig. 4}
+    \end{figure} 
     \item \textbf{Pronóstico: } Dada una serie de tiempo hasta un tiempo $t_n$, pronósticar los siguientes valores.
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width = 10 cm]{Figures/T1.png} 
+        % \caption{}
+        \label{Fig. 5 }
+    \end{figure} 
     \item \textbf{Detección de anomalias: } Encuentra subsecuencias de la serie de tiempo, también llamadas discords.
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width =10 cm ]{Figures/T4.png} 
+        % \caption{}
+        \label{Fig. 6}
+    \end{figure} 
     \item \textbf{Motif Discovery: } Encuentra cada suvsecuencia (llamada Motif) que parece governar la serie temporal recurrentemente.
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width = 10 cm ]{Figures/T6.png} 
+        % \caption{}
+        \label{Fig. 7}
+    \end{figure} 
     \item \textbf{Rules Discovery: } Encuentra las reglas que podrían governar la asociación entre conjuntos de subsecuencias de series temporales.
+    % \begin{figure}[H] 
+    %     \centering 
+    %     \includegraphics[width = ]{Figures/} 
+    %     \caption{}
+    %     \label{Fig. }
+    % \end{figure} 
 \end{enumerate}
 
 Tambien definen los compnentes para la Implementación
@@ -225,14 +273,46 @@ Para responder a la tercer pregunta de investigación, se extrajo información a
     \label{Fig. 02}
 \end{figure} 
 
-Casi todos los paqutes depende en numpy. Las paquetes con mayor dependencia son numpy, scipy, pandas, scikit-learn, y mathplotlib.
+Casi todos los paqutes depende en numpy. Las paquetes con mayor dependencia son numpy, scipy, pandas, scikit-learn, y matplotlib.
 
 
 
+\section{Discusión y amenazas para la validación}
+
+En esta sección se discuten las elecciones que hicieron los autores que puedan afectar la validiación del articulo. Esta revisión se centra en GitHub. Se limitaron a repositorios con al menos 100 estrellas. Esto es algo arbitrario sobre todo para paquetes con cerca de 100 estrellas.
+
+Varios paquetes no pudieron ser encontrados de forma automatica. Por ejemplo, el paquete cesium no lista en GitHub, sino que fue encontrado tras el \textit{snowballing}. Trataron de automatizar algunos de los cometidos, usando PyPI y la API de GitHub, o la herramienta johnnydep. Hubo varios falsos positivos. Por lo que fue necesario checar cada uno manualmente.
+De igual forma, saber si un paquete se concentra en un dominio especifico es algo ambiguo o difuso, entonces decidieron tomar un acercamiento conservativo para mantener la revisión concentrada en series temporales.
+
+La clasificación de los paquetes está en la tabla 4 del articulo, que vemos en la siguiente figura
+\begin{figure}[H] 
+    \centering 
+    \includegraphics[width = 14cm]{Figures/packages.png} 
+    \caption{Clasificación de paqueterías. Tasks: T1(Pronóstico),T2 (clasificación), T3 (clustering), T4 (detección de anomalias), T5 (Segmentación), T6 (reconocimiento de patrones), T7(Cambio del putn de detección). Preparación de los datos(componentes de implementación): DP1 (reducción de dimensionalidad), DP2 (imputación de valor ausente), DP3 (descomposición), DP4 (preprocesamiento), DP5 (medidas de similaridad). Evaluaciones: E1 (selección de modelos, busqueda hiperparámetrica, selección de carácteristicas), E2 (metricas y pruebas estadísticas), E3 (visualización). Bases de datos: D1 generación sintética de datos, D2 (continen bases de datos). Documentación: Do1 (documentación dedicada), Do2 (notebook ejecutable), Do3 (referecia API), Do4 (guia de instalación), Do5 (guia al usuario).}
+    \label{Fig. }
+\end{figure} 
 
 
+\section{Conclusión}
+
+En el articulo se presentó una revisión sistematica de 40 paqueterías de Python dedicadas a series temporales. Los autores propusieron una categorización de los paquetes según el análisis implementado. Tambien discutieron el procediemento de busqueda de tales paqueterías, los posibles sesgos y retos encontrados mientras se hacia dicha actividad. Como los paquetes iran evolucionando, los autores mantienen una lista actualizada en su pagina de GitHub en \textit{https://siebert-julien.github.io/time-series-analysis-python/overview.html}.
 
 
+% \bibliographystyle{plain} % We choose the "plain" reference style
+% \bibliography{refs} % Entries are in the refs.bib file
+
+% \cite{Brockwell}
+
+\begin{thebibliography}{9}
+
+  \bibitem{Siebert}
+  Siebert, J., Groß, J., and Schroth, C. (2021). A systematic review of python packages for time series analysis. arXiv preprint arXiv:2104.07406.
+
+  \bibitem{Brockwell}
+  Brockwell, P. J., and Davis, R. A. (Eds.). (2002). Introduction to time series and forecasting. New York, NY: Springer New York.
+  
+  
+  \end{thebibliography}
 
 
 

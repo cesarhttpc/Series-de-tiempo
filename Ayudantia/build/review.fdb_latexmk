@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1695969713 "c:/Users/ce_ra/Documents/CIMAT/Semestres/Tercero/Series Tiempo/Series de tiempo/Ayudantia/review.tex" "build/review.pdf" "review" 1695969715 0
+["pdflatex"] 1696007928 "c:/Users/ce_ra/Documents/CIMAT/Semestres/Tercero/Series Tiempo/Series de tiempo/Ayudantia/review.tex" "build/review.pdf" "review" 1696007932 0
   "C:/Users/ce_ra/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1693352630 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/ce_ra/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1693352273 24120579 85898b25958cf632ec7946174c56943b ""
   "C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -198,12 +198,20 @@
   "C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-abspage.sty" 1650051284 2245 c8a4088d07cffc2e5207730c738edd76 ""
   "C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-base.sty" 1650051284 20785 71a3d72ab517959a6979c27e6176bec1 ""
   "Figures/EscudoCimat.png" 1694016590 23978 afd125464800623154e6cd8f9742e14b ""
+  "Figures/T1.png" 1696004881 53002 04af47bddbedac4930dbd968c0e00d69 ""
+  "Figures/T2.png" 1696005018 139677 e0c43844e36ae1e443b511e8e8845bdb ""
+  "Figures/T3.png" 1696004947 212153 463165e2a5e25a44b4ae043395a022ea ""
+  "Figures/T4.png" 1696005057 59638 3f8059f7980ea6a5f9956abd89dba136 ""
+  "Figures/T5.png" 1696005089 53651 9fd4183c5a6dbf1251e53492dbc703db ""
+  "Figures/T6.png" 1696005120 79285 21a20063f830ed0b0e9fe18df2daf490 ""
+  "Figures/T8.png" 1696005407 63255 6b7e63727e6bb2e898f38bb5ee22497f ""
   "Figures/metodologia.png" 1695963911 28198 5e9b9c8bd6f5608361cdecfaa0397a55 ""
+  "Figures/packages.png" 1696003636 78174 20a1557c04a3df4ee9e9d452652a79f2 ""
   "Figures/stars.png" 1695969563 49236 492990ba9179c4b23de8960428a758be ""
-  "build/review.aux" 1695969715 2821 b77a0804323924880ffa9b01046447f4 "pdflatex"
-  "build/review.out" 1695969715 2429 d71aa7bdd153fffcd8e11d4e1856371c "pdflatex"
-  "c:/Users/ce_ra/Documents/CIMAT/Semestres/Tercero/Series Tiempo/Series de tiempo/Ayudantia/review.tex" 1695969712 13781 6d4935ee61ced3aa4a53f7d7177d62a2 ""
-  "review.tex" 1695969712 13781 6d4935ee61ced3aa4a53f7d7177d62a2 ""
+  "build/review.aux" 1696007931 5594 bfb3f282a0e9ee3d21249d2a551f25ef "pdflatex"
+  "build/review.out" 1696007931 2786 08d7a2c89f5f87fb64a9bec491593a63 "pdflatex"
+  "c:/Users/ce_ra/Documents/CIMAT/Semestres/Tercero/Series Tiempo/Series de tiempo/Ayudantia/review.tex" 1696007927 18236 100df783c6a1044e53ae56cab3c32fba ""
+  "review.tex" 1696007927 18236 100df783c6a1044e53ae56cab3c32fba ""
   (generated)
   "build/review.aux"
   "build/review.log"
