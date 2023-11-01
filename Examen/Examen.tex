@@ -1,0 +1,355 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{comment}
+\usepackage{lipsum} 
+\usepackage{fullpage} %cambiar margen
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+
+\usepackage{amssymb,amsthm} 
+\usepackage{amsmath}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{verbatim}
+%\usepackage[numbered]{mcode}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{arrows,calc,positioning}
+\usepackage{mathpazo} %tipo de letra 
+\usepackage[utf8]{inputenc} %codificación
+\usepackage[T1]{fontenc} %digitación de tildes y ñ
+\usepackage[spanish]{babel} %paquete de soporte español
+
+\tikzset{
+	block/.style = {draw, rectangle,
+		minimum height=1cm,
+		minimum width=1.5cm},
+	input/.style = {coordinate,node distance=1cm},
+	output/.style = {coordinate,node distance=4cm},
+	arrow/.style={draw, -latex,node distance=2cm},
+	pinstyle/.style = {pin edge={latex-, black,node distance=2cm}},
+	sum/.style = {draw, circle, node distance=1cm},
+}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+
+\usepackage{listings}
+\lstset{literate=
+  {á}{{\'a}}1
+  {é}{{\'e}}1
+  {í}{{\'i}}1
+  {ó}{{\'o}}1
+  {ú}{{\'u}}1
+  {Á}{{\'A}}1
+  {É}{{\'E}}1
+  {Í}{{\'I}}1
+  {Ó}{{\'O}}1
+  {Ú}{{\'U}}1
+  {ñ}{{\~n}}1
+  {ü}{{\"u}}1
+  {Ü}{{\"U}}1
+}
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{customasm}{
+  belowcaptionskip=1\baselineskip,
+  frame=L,
+  xleftmargin=\parindent,
+  language=[x86masm]Assembler,
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\itshape\color{purple!40!black},
+}
+
+\lstset{escapechar=@,style=customc}
+
+
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\newenvironment{problem}[2][Ejercicio]
+{ \begin{mdframed}[backgroundcolor= red!50] \textbf{#1 #2} \\}
+	{  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+{\textcolor{blue}{\textbf{\textit{Solución:\\\noindent}}}}
+
+
+\renewcommand{\qed}{\quad\qedsymbol}
+
+% \\	
+\begin{document}
+	\noindent
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\begin{minipage}[b][1.2cm][t]{0.8\textwidth}
+		\large\textbf{César Isaí García Cornejo} \hfill \textbf{Examen Parcial}  \\
+		cesar.cornejo@cimat.mx \hfill \\
+		\normalsize Series de Tiempo \hfill Semestre 3\\
+	\end{minipage}
+	
+	\hspace{14.4cm}
+	\begin{minipage}[b][0.03cm][t]{0.12\linewidth}
+		
+		\vspace{-2.2cm}
+		%%%La Ruta dependerá de donde este alojado el main y la imagen
+		\includegraphics[scale=0.3]{Figures/EscudoCimat.png}
+	\end{minipage}
+	
+	\noindent\rule{7in}{2.8pt}
+	
+	%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Problem 1
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setlength{\parskip}{\medskipamount}
+	\setlength{\parindent}{0pt}
+ %///////////////////////////////////////////////////
+
+
+
+\begin{problem}{1} 
+    Considera la ST
+    \begin{align*}
+        Y_t = \text{0.4} Y_{t-1} + \text{0.45}Y_{t-2} + Z_t + Z_{t-1} + \text{0.25}Z_{t-2}
+    \end{align*}
+    donde $Z_t \sim WN(0,\sigma^2)$.
+    \begin{enumerate}
+        \item Expresa esta ecuación en términos del operador ``backshift'' $B$; es decir, escríbela como una ecuación en $B$, y determina el orden $(p,d,q)$ de este modelo.
+        \item ?` Puedes simplificar esta ecuación? ?` Cuál es el orden después de la simplificación?
+        \item determina si este modelo es causal y/o invertible.
+        \item Si el modelo es causal, encuentra la forma general de los coeficientes $\psi_j$'s tal que $$Y_t = \sum_{j = 0}^{\infty} \psi_j Z_{t-j}$$.
+        \item Si el modelo es invertible, encuentra la forma general de los coeficientes $\pi_j $ tal que $$Z_t = \sum_{j=0}^{\infty} \pi_j Y_{t-j}$$. 
+    \end{enumerate}
+\end{problem}
+
+\begin{solution} 
+  \begin{enumerate}
+    \item Expresamos la serie de tiempo en la forma de un ARIMA(p,d,q)
+    \begin{align*}
+      Y_t -\text{0.4}Y_{t-1} - \text{0.45} Y_{t-2} &= Z_t + Z_{t-1} + \text{0.25} Z_{t-2},\\
+      \left(1-\text{0.4}  B -\text{0.45} B^2  \right) Y_t &= \left(1+B+\text{0.25}B^2 \right) Z_t ,\\
+      \left(1 + (\text{0.9} - \text{0.5} )B + (\text{0.5}  ) (-\text{0.9} )B^2\right)  Y_t &= \left(1 + 2(\text{0.5} ) B + (\text{0.5})^2 B^2\right) Z_t ,\\
+      (1-\text{0.9} B )(1+\text{0.5} B) Y_t &= (1+\text{0.5} B)^2 Z_t,\\
+      \phi'(B) Y_t &= \theta'(B) Z_t. 
+    \end{align*}
+    donde $\phi'(B) = (1-\text{0.9} B )(1+\text{0.5} B)$ y $\theta' (B) = (1+\text{0.5} B)^2$ como no hay raíces unitarias, el valor de $d = 0$. Entonces, esta serie de tiempo es un ARIMA(2,0,2).
+    
+    \item Recordemos que para evitar tener problemas de identificabilidad es necesario simplificar los factores, de ser posible. En este caso tenemos que la simplificación es
+    \begin{align*}
+      (1-\text{0.9} B )Y_t &= (1+\text{0.5} B) Z_t,\\
+      \phi(B) Y_t &= \theta(B) Z_t. 
+    \end{align*}
+    donde $\phi(B) = 1-\text{0.9} B $ y $\theta(B) = 1+\text{0.5} B$ y el orden de esta serie de tiempo es (1,0,1).
+    \item Recordemos que un modelo es causal si y solo si todas las raíces de $\phi (z)$ son mayores que uno en norma. Un modelo es invertible si y solo si las raíces de $\theta(z) $ son mayores que uno en norma. Así
+    para $\phi(z)$
+    \begin{align*}
+      0 = \phi(z) = 1-\text{0.9} z    \:\:\: \Rightarrow \:\:\: z_1 = 10/9
+    \end{align*}
+    como $|z_1| > 1$ entonces la ST es causal. Luego,
+    \begin{align*}
+      0 = \theta(z) = 1 + \text{0.5} z  \:\:\: \Rightarrow \:\:\: z_2 = -2
+    \end{align*}
+    como $|z_2| > 1 $ entonces la ST es invertible.
+    \item Ahora que ya probamos que la ST es causal e invertible, para obtener la expresión solicitada hacemos la siguiente manipulación
+    \begin{align*}
+      Y_t &= \frac{\theta(B)}{\phi(B)} Z_t ,\\  
+      Y_t &= \left(1+\text{0.5}B \right) \frac{1}{1-\text{0.9} B} Z_t
+    \end{align*}
+    por expansión en serie geométrica
+    \begin{align*}
+      Y_t &= (1+ \text{0.5} B ) \left(1 + \text{0.9}  B + \text{0.9}^2B^2 + \text{0.9}^3 B^3 + \cdots \right) Z_t,\\
+      &= \left(1 + (\text{0.9})^0(\text{0.9} + \text{0.5} )B + (\text{0.9} ^2 + \text{0.9} \cdot \text{0.5} ) B^2 + (\text{0.9} ^3 + \text{0.9} ^2 \cdot \text{0.5} )B^3 + \cdots\right) Z_t,\\
+      &= \left(1 + \sum_{j=1}^{\infty}\text{1.4} \cdot (\text{0.9} )^{j-1}B_j   \right) Z_t ,\\
+      &= Z_t + \sum_{j=1 }^{\infty} \text{1.4} (\text{0.9} )^{j-1} Z_{t-j} 
+    \end{align*}
+    Comparando con la expansión causal del enunciado, $\psi_0 = 1$ y $\psi_j = \text{1.4} (\text{0.9} )^{j-1}$ para $j = 1,2,\cdots$.
+    \item Semejante al anterior tomamos la representación
+    \begin{align*}
+      Z_t &= \frac{\phi(B)}{\theta(B)}Y_t 
+    \end{align*}
+    con la expansión de la serie geométrica y simplificando
+    \begin{align*}
+      Z_t &= \frac{1 - \text{0.9} B }{1+ \text{0.5} B} Y_t ,\\
+      &= (1-\text{0.9} B)(1-\text{0.5} B + \text{0.5} ^2 B^2  - \text{0.5} ^3 B^3 + \cdots)Y_t ,\\
+      &= \left(1 + (-\text{0.5} - \text{0.9} )B + (\text{0.5}^2 + (\text{-0.5})(-\text{0.9} ) )B^2 +  (-\text{0.5} ^3 -(\text{0.9} )(\text{-0.5} ^2)) B^3 + \cdots \right) Y_t,\\
+      &= \left(1 + \sum_{j=1}^{\infty} \left((-\text{0.5} )^{i} - \text{0.9} (-\text{0.5} )^{i-1}\right) \right) Y_t,\\
+      &= \left(1 + \sum_{j=1}^{\infty}(-\text{0.5} )^{i-1}(-\text{0.5} - \text{0.9} )\right) Y_t,\\
+      &= \left(1 + \sum_{j=1}^{\infty}(-\text{0.5})^{i-1}(-\text{1.4})\right) Y_t,
+    \end{align*}
+    Comparando con la expresión invertible dada por el enunciado. Tenemos, $\pi_0 = 1$ y $\pi_j = -\text{1.4} (-\text{0.5} )^{j-1}$ para $j = 1,2, \cdots$
+  \end{enumerate}
+    
+\end{solution}
+
+\begin{problem}{2} 
+    Asume que una ST satisface la ecuación en diferencias
+    \begin{align*}
+        Y_t = \left\{\begin{matrix}
+            1 & t = 0,1 \\ 
+            \text{0.4} Y_{t-1}  +\text{0.77} Y_{t-2} + e_t &\:\:\:\:\:\:\: t=2,3, \cdots 
+            \end{matrix}\right.
+    \end{align*}
+    donde las $e_t$'s son v.a. no-correlacionadas(0,1). Sea $(Y_2,Y_4,Y_5) =$ (2,3,2.9).
+    \begin{enumerate}
+        \item Predice $Y_6$ y $Y_7$. Calcula la matriz de covarianzas de tu predicción. \textit{Hint: Usa el mejor predictor general} 
+        \item ?`Cuál es el límite $\lim_{s\rightarrow\infty}\mathbb{E}\left [\left(Y_{5+s}- \hat{Y_{5+s}} \right)^{2}\right ]$ ?
+    \end{enumerate}
+\end{problem}
+
+\begin{solution} 
+  
+
+\end{solution}
+
+\begin{problem}{3} 
+    Sea $Y_t = Z_t - \theta Z_{t-1}$, $Z_t \sim WN(0,\sigma^2)$.
+    \begin{enumerate}
+        \item Calcula la función de correlación $\rho(k)$ de $Y_t$.
+        \item Supón que $\rho(1) = $ 0.4. ?` Cuál preferirías? Proporciona una explicación corta. 
+        \item En lugar de un modelo MA(1), asume que $Y_t$ es un modelo MA($\infty$) dado por 
+        \begin{align*}
+            Y_t = Z_t + C (Z_{t-1} + Z_{t-2 } + \cdots),
+        \end{align*}
+        \item Si $\{Y_t \}$ en la ecuación anterior se diferencía (i.e.,$ X_t = Y_t - Y_{t-1}$), muestra que $X_t$ es un modelo estacionario MA(1).
+        \item Encuentra la función de autocorrelación de $\{X_t\}$.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution} 
+  \begin{enumerate}
+    \item Calculemos primeramente la función de autocovarianza
+    \begin{align*}
+      \gamma(k) = Cov(Y_t,Y_{t+k}).
+    \end{align*}
+    Para $k = 0$ 
+    \begin{align*}
+      \gamma(0) &= \mathbb{V}ar[Y_t ],\\
+      &= \mathbb{V}ar[Z_t - \theta Z_{t-1}] ,\\
+      &= \mathbb{V}ar[Z_t] + \theta^2 \mathbb{V}ar[Z_{t-1}] 
+    \end{align*}
+    donde se usó la no-correlación del ruido blanco $Z_t$. Luego,
+    \begin{align*}
+      \gamma(0) = (1+ \theta^2)\sigma^2
+    \end{align*}
+    Para $k = 1$
+    \begin{align*}
+      \gamma(1) &= Cov(Y_t, Y_{t+1}) ,\\
+      &= Cov(Z_t - \theta Z_{t-1}, Z_{t+1} - \theta Z_{t} ),\\
+      &= -\theta \sigma^2
+    \end{align*}
+    Lo mismo es para $k= -1$. Para $|k| \geq 2$ no hay términos con covarianza no nula, es decir su covarianza es nula. Resumiendo
+    \begin{align*}
+      \gamma(k) = \left\{\begin{matrix}
+        (1+ \theta^2) \sigma^2&, k = 0 \\ 
+        -\theta \sigma^2 &, |k| = 1\\
+        0 &, |k| \geq 2 
+      \end{matrix}\right.
+    \end{align*}
+    Se sigue que
+    \begin{align}
+      \rho(k) = \frac{\gamma(k)}{\gamma(0)} = \left\{\begin{matrix}
+        1 & ,k = 0 \\ 
+        \frac{-\theta}{1 + \theta^2} &, |k| = 1\\
+        0 &, |k| \geq 2 
+      \end{matrix}\right.
+      \label{3.01}
+    \end{align}
+    es la función de autocorrelación.
+    
+    \item Supongamos que $\rho_1 = \rho(1) =$ 0.4. De (\ref{3.01}) 
+    \begin{align*}
+      \rho_1 = -\frac{\theta}{1+ \theta^2},\\
+      \rho_1 + \rho_1 \theta^2 + \theta = -\theta,\\
+      \rho_1 \theta^2 +\theta + \rho_1 = 0.
+    \end{align*}
+    Resolviendo la ecuación cuadrática
+    \begin{align*}
+      \theta = \frac{-1\pm \sqrt{1-4\rho_1^2}}{2\rho_1} = \frac{-1 \pm \text{0.6} }{\text{0.8} }
+    \end{align*}
+    obteniendo las raíces
+    \begin{align*}
+      \theta_+ &= -0.5,\\
+      \theta_- &= -2.
+    \end{align*}
+    Nos quedamos con $\theta = $-0.5 porque con está tenemos las raíces del polinomio característico mayores que uno en norma. Lo que implica que la ST es invertible.
+    
+    \item Sabemos que una serie de tiempo es estacionario si tanto su media como su función de covarianza no dependen del tiempo $t$ (si la función de covarianza es finita). Analicemos dichas características. Para la esperanza 
+    \begin{align*}
+      \mathbb{E}\left [Y_t \right ] &= \mathbb{E}\left [ Z_t + C(Z_{t-1} + Z_{t-2} + \cdots )\right ],\\
+      &= 0
+    \end{align*}
+    por linealidad de la esperanza. 
+
+    Consideremos la varianza de la ST
+    \begin{align*}
+      \mathbb{V}ar[Y_t  ] &= \mathbb{V}ar[Z_t + C(Z_{t-1} + Z_{t-2} + \cdots )],\\
+      &= \sigma^2 + C^2 (\sigma^2 + \sigma^2 + \cdots)
+    \end{align*}
+    donde se usó la no-correlación del ruido blanco. Si $C \neq 0$ entonces la varianza es infinita lo que implica que no puede ser estacionaria ya que la definición tiene como hipótesis varianza finita.
+
+    \item Haciendo el calculo explícito
+    \begin{align*}
+      X_t &= Y_t - Y_{t-1},\\
+      = &Z_t + C(Z_{t-1} + Z_{t-2} + Z_{t-3} + \cdots) +\\
+      & -Z_{t-1} - C(Z_{t-2} + Z_{t-3} + Z_{t-3} + \cdots )\\
+      &= Z_t - Z_{t-1} + C(Z_{t-1})
+    \end{align*}
+    lo que se simplifica al MA(1) 
+    \begin{align*}
+      X_t = Z_t + (C-1)Z_{t-1}
+    \end{align*}
+    que sabemos que es estacionario.
+
+    \item Como es un MA(1) y ya calculamos la correlación en (\ref{3.01}) con $\theta = C-1$. Tenemos que la función de autocorrelación es
+    \begin{align*}
+      \rho(k) = \left\{\begin{matrix}
+        1 & ,k = 0 \\ 
+        -\frac{(C-1)}{1 + (C-1)^2} &, |k| = 1\\
+        0 &, |k| \geq 2 
+        \end{matrix}\right.
+    \end{align*}
+    lo que concluye el ejercicio. 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  \end{enumerate}
+
+\end{solution}
+
+
+
+
+
+\end{document}
