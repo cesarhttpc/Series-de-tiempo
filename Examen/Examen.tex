@@ -211,14 +211,158 @@
     donde las $e_t$'s son v.a. no-correlacionadas(0,1). Sea $(Y_2,Y_4,Y_5) =$ (2,3,2.9).
     \begin{enumerate}
         \item Predice $Y_6$ y $Y_7$. Calcula la matriz de covarianzas de tu predicción. \textit{Hint: Usa el mejor predictor general} 
-        \item ?`Cuál es el límite $\lim_{s\rightarrow\infty}\mathbb{E}\left [\left(Y_{5+s}- \hat{Y_{5+s}} \right)^{2}\right ]$ ?
+        \item ?`Cuál es el límite $\lim_{s\rightarrow\infty}\mathbb{E}\left [\left(Y_{5+s}- \hat{Y}_{5+s} \right)^{2}\right ]$ ?
     \end{enumerate}
 \end{problem}
 
 \begin{solution} 
   
+\begin{enumerate}
+  \item Buscamos el mejor predictor general, es decir buscamos $g(X)$ tal que el error cuadrático sea mínimo. Tenemos el problema
+  \begin{align*}
+    MSE(g(X)) = \text{argmin}_{g(X)} \mathbb{E}\left [\left(Y_{t+1} - g(X)\right) ^2\right ]
+  \end{align*}
+  donde $X= (Y_n, Y_{n-1}, ... , Y_1)$. Nótese que si $g(X) = c$ es constante entonces $g(X) = \mathbb{E}\left [Y \right ]$ ya que se trata de mínimizar 
+  \begin{align*}
+    \mathbb{E}\left [\left(Y_{n+1}-c\right) ^2\right ].
+  \end{align*}
 
+  Ahora, usemos propiedad de torre para la expresión
+  \begin{align*}
+    \mathbb{E}\left [Y_{n+1} - g(X)\right ] &= \mathbb{E}\left [\mathbb{E}\left [\left(Y_{n+1}-g(X)\right) ^2| X \right ]\right ]
+  \end{align*}
+  Para una observación $x$ la esperanza condicional del evento $X=x$ es
+  \begin{align*}
+    \mathbb{E}\left [Y_{n+1} - g(x)\right ] &= \mathbb{E}\left [\mathbb{E}\left [\left(Y_{n+1}-g(x)\right) ^2| X= x \right ]\right ]
+  \end{align*}
+
+  Como $g(x)$ es constante para la esperanza interna entonces se minimiza tomando $g(x) = \mathbb{E}\left [Y|X=x\right ]$. Como esto pasa para toda $x$ entonces podemos tomar
+  \begin{align*}
+    g(X) = \mathbb{E}\left [Y_{n+1}|X\right ]
+  \end{align*}
+
+  Desde luego, el estimador para $Y_{n+1}$ es $\hat{Y}_{n+1} = \mathbb{E}\left [Y_{n+1} | X\right ]$. 
+
+  Queremos predecir $Y_6$, entonces de la relación de recurrencia
+  \begin{align*}
+    \hat{Y}_6 &= \mathbb{E}\left [\text{0.4} Y_{5} + \text{0.77}Y_{4} + e_6 |X = (Y_5,Y_4) \right ] ,\\
+    &=\text{0.4} \mathbb{E}\left [ Y_{5}|Y_5,Y_4\right ] + \text{0.77} \mathbb{E}\left [Y_4|Y_5,Y_4\right ] + \mathbb{E}\left [e_6|Y_5,Y_6\right ],\\
+    &= \text{0.4} \cdot \text{2.9} + \text{0.77} \cdot \text{3},\\
+    &= \text{3.47} 
+  \end{align*}
+  Nótese que por la naturaleza de la serie, los valores de $Y_3,Y_2,Y_1$ no aportan información a la predicción por lo que se omitió en los cálculos.
+
+  Para hacer la predicción de $Y_7$ notemos que podemos usar la recursion que define $Y_t$. Denotemos por
+  \begin{align}
+    Y_t = \phi _1 Y_{t-1} + \phi_2 Y_{t-2} + e_t
+    \label{2_01}
+  \end{align}
+  entonces
+  \begin{align*}
+    Y_{t+1} &= \phi _1 Y_{t} + \phi_2 Y_{t-1} + e_{t+1},\\
+    &= \phi_1 \left(\phi _1 Y_{t-1} + \phi_2 Y_{t-2} + e_t\right) + \phi_2 Y_{t-1} + e_{t+1},\\
+    &= \phi_1^2Y_{t-1} + \phi_1 \phi_2 Y_{t-2}+\phi_2 Y_{t-1} + \phi_1e_t + e_{t+1}
+  \end{align*}
+  Es decir, podemos predecir a dos pasos usando (t=6)
+  \begin{align}
+    Y_{t+1} = (\phi_1^2 + \phi_2) Y_{t-1} + \phi_1\phi_2 Y_{t-2} + \phi_1 e_t + e_{t+1}.
+    \label{2.01}
+  \end{align}
+  Por tanto,
+  \begin{align*}
+    \hat{Y}_7 &= \mathbb{E}\left [Y_7 |Y_5,Y_4\right ] ,\\
+    &= (\phi_1^2 + \phi_2) Y_{5} + \phi_1\phi_2 Y_4,\\
+    &= \left(\text{0.4} ^2 + \text{0.77} \right) \text{2.9} + \text{0.4} \cdot \text{0.77} \cdot 3,\\
+    &= \text{3.621} 
+  \end{align*}
+  Observese que lo anterior es equivalente a predecir $Y_7$ dado como observaciones $Y_6,Y_5$ donde el $Y_6$ es la predicción dado $Y_5,Y_4$. Entonces, en general si se desea predecir para $Y_{n+s}$ es necesario calcular las predicciones previas partiendo de las observaciones $Y_n$. Es decir, calcular $\hat{Y}_{n+1}, \hat{Y}_{n+2}, \cdots, \hat{Y}_{n+s}$ recursivamente.
+
+  Para obtener la matriz de covarianza de la predicción, definamos el vector
+  \begin{align*}
+    Y = \binom{Y_6}{Y_7}
+  \end{align*}
+  y el vector de predicciones 
+  \begin{align*}
+    \hat{Y} = \binom{\hat{Y}_6}{\hat{Y}_7}
+  \end{align*}
+
+  La matriz de covarianza de la predicción es
+  \begin{align*}
+    \Sigma &= \mathbb{E}\left [ (Y- \hat{Y})(Y-\hat{Y})'\right ],\\
+    &= \mathbb{E}\left [\begin{pmatrix}
+      Y_6 - \hat{Y}_6\\ 
+      Y_7 - \hat{Y}_7
+      \end{pmatrix}
+      \begin{pmatrix}
+      Y_6 - \hat{Y}_6 &Y_7 - \hat{Y}_7
+      \end{pmatrix}\right ],\\
+    &=\begin{pmatrix}
+      \mathbb{E}\left [(Y_6 - \hat{Y}_6)(Y_6 - \hat{Y}_6)\right ] & \mathbb{E}\left [(Y_6 - \hat{Y}_6)(Y_7 - \hat{Y}_7)\right ] \\ 
+      \mathbb{E}\left [(Y_7 - \hat{Y}_7)(Y_6 - \hat{Y}_6)\right ] & \mathbb{E}\left [(Y_7 - \hat{Y}_7)(Y_7 - \hat{Y}_7)\right ] 
+      \end{pmatrix}
+  \end{align*}
+  como $Y_6 = \text{0.4} Y_{5}  +\text{0.77} Y_{4} + e_6 $ y $\hat{Y}_6 = \text{0.4} Y_{5}  +\text{0.77} Y_{4}$  entonces $Y_6 - \hat{Y}_6 = e_6$. De igual forma, con (\ref{2.01}) obtenemos $Y_7 - \hat{Y}_7 = \phi_1 e_6 + e_7 = \text{0.4}e_6 + e_7 $. Así,
+  \begin{align*}
+    \Sigma &= \begin{pmatrix}
+      \mathbb{E}\left [e_6^2\right ] & \mathbb{E}\left [e_6(\text{0.4}e_6 + e_7)\right ] \\ 
+      \mathbb{E}\left [e_6(\text{0.4}e_6 + e_7)\right ] & \mathbb{E}\left [e_7^2\right ] 
+      \end{pmatrix},\\
+      &= \begin{pmatrix}
+        \sigma^2 & \text{0.4}\sigma^2\\ 
+        \text{0.4}\sigma^2 & \sigma^2
+        \end{pmatrix},\\
+      &= \sigma^2 \begin{pmatrix}
+        1& \text{0.4}\\ 
+        \text{0.4} & 1
+        \end{pmatrix}
+  \end{align*}
+  (con $\sigma$ = 1).
+  
+  \item Consideremos iterar la ecuación (\ref{2_01}) recursivamente
+  \begin{align*}
+    Y_{5+1} &= \phi _1 Y_{5} + \phi_2 Y_{4} + e_6,\\
+    \hat{Y}_{5+1} &= \phi _1 Y_{5} + \phi_2 Y_{4}
+  \end{align*}
+  Entonces la diferencia es
+  \begin{align*}
+    \mathbb{E}\left [\left(Y_{5+1} - \hat{Y_{5+1}} \right) ^2\right ]= \mathbb{E}\left [e_6^2\right ] = \sigma^2 = 1
+  \end{align*}
+  Para dos pasos vimos en (\ref{2.01})
+  \begin{align*}
+    Y_{5+2} &= (\phi_1^2 + \phi_2) Y_{5} + \phi_1\phi_2 Y_{4} + \phi_1 e_6 + e_{7},\\
+    \hat{Y}_{5+2} &= (\phi_1^2 + \phi_2) Y_{5} + \phi_1\phi_2 Y_{4} 
+  \end{align*}
+  entonces
+  \begin{align*}
+    \mathbb{E}\left [\left(Y_{5+2} - \hat{Y}_{5+2}\right) ^2\right ] &= \mathbb{E}\left [\left(\phi_1 e_6 + e_{7}\right) ^2\right ] ,\\
+    &= \phi_1^2 +1
+  \end{align*}
+  Haciendo esta iteración un par de veces más. Para tres pasos
+  \begin{align*}
+    Y_{5+3} = \left(\phi_1^3 + 2\phi_1\phi_2\right) Y_5 + \left(\phi_1^2 \phi_2 + \phi_2^2\right) Y_4 + \left(\phi_1^2 + \phi_2\right) e_6 + \phi_1 e_7 + e_8
+  \end{align*}
+  Luego,
+  \begin{align*}
+    \mathbb{E}\left [\left(Y_{5+3}- \hat{Y}_{5+3}\right) ^2 \right ] &= \mathbb{E}\left [\left(\left(\phi_1^2 + \phi_2\right) e_6 + \phi_1 e_7 + e_8\right) ^2\right ] ,\\
+    &=  \left(\phi_1^2 + \phi_2\right)  ^2 + \phi_1^2 +1
+  \end{align*}
+  
+  Para 4 pasos
+  \begin{align*}
+    \mathbb{E}\left [\left(Y_{5+4} - \hat{Y}_{5+4}\right)^2 \right ] &=
+    \mathbb{E}\left [\left(\left(\phi_1^3 + 2\phi_1\phi_2\right) e_6 + (\phi_1^2 + \phi_2)e_7 + \phi_1 e_8 + e_9\right) ^2\right ] ,\\
+    &= \left(\phi_1^3 + 2\phi_1\phi_2\right) ^2 + (\phi_1^2 + \phi_2)^2 + \phi_1^2 + 1
+  \end{align*}
+  
+  Para poder concluir se requiere encontrar la formula recursiva explicita y así poder hacer la suma infinita de los $\phi_1$ y $\phi_2$ (límite). Notemos que $|\phi_1|<1$ y $|\phi_2|<1$ por lo que la suma es convergente.
+
+  Nota: No encontré la forma explícita.
+  
+  
+\end{enumerate}
 \end{solution}
+
+\newpage
 
 \begin{problem}{3} 
     Sea $Y_t = Z_t - \theta Z_{t-1}$, $Z_t \sim WN(0,\sigma^2)$.

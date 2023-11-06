@@ -1,0 +1,286 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{comment}
+\usepackage{lipsum} 
+\usepackage{fullpage} %cambiar margen
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+
+\usepackage{amssymb,amsthm} 
+\usepackage{amsmath}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{verbatim}
+%\usepackage[numbered]{mcode}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{arrows,calc,positioning}
+\usepackage{mathpazo} %tipo de letra 
+\usepackage[utf8]{inputenc} %codificación
+\usepackage[T1]{fontenc} %digitación de tildes y ñ
+\usepackage[spanish]{babel} %paquete de soporte español
+
+\tikzset{
+	block/.style = {draw, rectangle,
+		minimum height=1cm,
+		minimum width=1.5cm},
+	input/.style = {coordinate,node distance=1cm},
+	output/.style = {coordinate,node distance=4cm},
+	arrow/.style={draw, -latex,node distance=2cm},
+	pinstyle/.style = {pin edge={latex-, black,node distance=2cm}},
+	sum/.style = {draw, circle, node distance=1cm},
+}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+
+\usepackage{listings}
+\lstset{literate=
+  {á}{{\'a}}1
+  {é}{{\'e}}1
+  {í}{{\'i}}1
+  {ó}{{\'o}}1
+  {ú}{{\'u}}1
+  {Á}{{\'A}}1
+  {É}{{\'E}}1
+  {Í}{{\'I}}1
+  {Ó}{{\'O}}1
+  {Ú}{{\'U}}1
+  {ñ}{{\~n}}1
+  {ü}{{\"u}}1
+  {Ü}{{\"U}}1
+}
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{customasm}{
+  belowcaptionskip=1\baselineskip,
+  frame=L,
+  xleftmargin=\parindent,
+  language=[x86masm]Assembler,
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\itshape\color{purple!40!black},
+}
+
+\lstset{escapechar=@,style=customc}
+
+
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\newenvironment{problem}[2][Ejercicio]
+{ \begin{mdframed}[backgroundcolor= red!50] \textbf{#1 #2} \\}
+	{  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+{\textcolor{blue}{\textbf{\textit{Solución:\\\noindent}}}}
+
+
+\renewcommand{\qed}{\quad\qedsymbol}
+
+% \\	
+\begin{document}
+	\noindent
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\begin{minipage}[b][1.2cm][t]{0.8\textwidth}
+		\large\textbf{César Isaí García Cornejo} \hfill \textbf{Box Jenkings}  \\
+		cesar.cornejo@cimat.mx \hfill \\
+		\normalsize Series de Tiempo \hfill Semestre 3\\
+	\end{minipage}
+	
+	\hspace{14.4cm}
+	\begin{minipage}[b][0.03cm][t]{0.12\linewidth}
+		
+		\vspace{-2.2cm}
+		%%%La Ruta dependerá de donde este alojado el main y la imagen
+		\includegraphics[scale=0.3]{Figures/EscudoCimat.png}
+	\end{minipage}
+	
+	\noindent\rule{7in}{2.8pt}
+	
+	%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Problem 1
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setlength{\parskip}{\medskipamount}
+	\setlength{\parindent}{0pt}
+ %///////////////////////////////////////////////////
+% \section*{Abstract}
+
+
+
+
+
+\section{Introducción}
+En econometría, el modelo autorregresivo de heterocedasticidad condicional es un modelo estadístico que describe la varianza del error actual como una función del valor del error en tiempos previos. Los modelos ARCH son apropiados cuando la varianza de un error de una serie temporal sigue un modelo autorregresivo (AR), si suponemos que un modelo autoregresivo de medias moviles (ARMA) para la varianza de los errores, entonces el modelo es un modelo autorregresivo con heterocedasticidad condicional generalizado (GARCH). En lo subsecuente abordamos una pequeña introducción a la metodología Box-Jenkings en modelos ARMA, para luego dar una discusión sobre los modelos GARCH dentro de lo establecido en \cite{GARCH}.
+
+\section{Metodología de Box-Jenkings}
+
+En el contexto de modelación de series temporales, el objetivo primordial es encontrar el modelo ARIMA(p,d,q ) más apropiado y usarlo para el pronóstico. Este se basa en un esquema iterativo:
+\begin{enumerate}
+    \item Identificación a priori del orden de diferenciación $d$ (u otra transformación)
+    \item Identificación a priori de los ordenes $p$ y $q$.
+    \item Estimación de los parámetros $(\varphi_1 ,\cdots, \varphi_p, \theta_1,\cdots, \theta_q)$ y $\sigma^2 = \mathbb{V}ar[\varepsilon_t]$.
+    \item Validación del modelo.
+    \item Elección del modelo.
+    \item Predicción
+\end{enumerate}
+
+Aunque se han desarrollado varias pruebas en los últimos 30 años, es paso 1 es esencialmente basado en la examinación de la gráfica de la serie temporal. Si los datos exhiben una desviación aparente de la estacionaridad, entonces no será apropiado elegir $d = 0$. Por ejemplo, si la amplitude de la variación tiende a incrementar, el supuesto de homocedásticidad puede ser cuestionado. Esto puede ser un indicador de que el proceso subyacente es heterocedástico. Si se observa una tendencia lineal regular, se puede asumir que el proceso subyacente es tal que $\mathbb{E}\left [X_t \right ] = at +b$ con $a\neq 0$. Si este supuesto es correcto, la serie de la primer diferencia $\Delta X_t = X_t - X_{t-1}$ debería no mostrar ninguna tendencia. Sino hay otros signos de no estacionariadad (como heterocedásticidad) entonces el supuesto $d = 1$ es plausible.
+El paso 2 es más problemático. La herramienta primaria es la función de autocorrelación muestral. Si por ejemplo, observamos que $\hat{\rho}(1)$ esta lejos del 0 pero para cualquier $h >1$, $\hat{\rho}(0)$ es cercano a cero, entonces es razonable que $\rho(1) \neq 0$ y $\rho(h ) = 0$ para $h>1$. En este caso, modelamos el proceso como un MA(1). Para identificar procesos AR, la función de autocorrelación parcial juega un papel análogo. Para modelos mixtos (esto es ARMA(p,q) con $pq \neq 0$), es necesario usar estadística más sofisticada. El paso 2 frecuentemente resulta con varios candidatos $(p_1,q_1), \cdots, (p_k,q_k )$ para el orden del ARMA. Estos $k$ modelos son estimados en el paso 3, usando por ejemplo, el método de mínimos cuadrados. El objetivo del paso 4 es calibrar si el modelo estimado es suficientemente compatible con los datos. Una parte importante del procedimiento es examinar los residuales, si el modelo es satisfactorio, deberían de aparentar un ruido blanco. Los correlogramas son examinados y las pruebas de portmanteau son usadas para decidir si los residuales son suficientemente cercanos a un ruido blanco. 
+
+Si varios modelos pasan la validación (paso 4), se pueden usar criterios de selección de modelos. Los más populares son Akaike (AIC) y Bayesiano (BIC) criterios de información. Complementando estos criterios, se pueden considerar propiedades predictivas del modelo y además el \textbf{principio de parsimonia}\footnote{El principio de parsimonia nos permite elegir el modelo más simple, como aquel que involucre la menor cantidad de parámetros.} Otras consideraciones pueden jugar un papel para la selección de modelos. Por ejemplo, los modelos frecuentemente involucran una variable con lag the orden 12 para meses en los datos, pero esto podría parecer poco natural para datos semanales. Si el modelo es apropiado, el paso 5 permite fácilmente calcular el mejor predictor linear $\hat{X}_t(h)$. Recuerda que los predictores lineales no necesitan necesariamente conllevar errores cuadráticos mínimos. Modelos no lineales o no métodos paramétricos suelen producir predicciones más precisas. Finalmente, el intervalo de predicción obtenido en el paso 6 de la metodología de BOx Jenkins se basa en supuestos Gaussianos. La magnitud no depende en l los datos, que para series financieras no son apropiadas.
+
+\subsection{Series financieras}
+Modelar series de tiempo financieras es un problema complejo. Esta complejidad no solo se debe a la variedad de series in uso (stocks, tasas de cambio, tasas de interés, etc. ) para la importancia dela frecuencia de observación (segundos, minutos, horas, días, etc. ), o para la disponibilidad de gran cantidad de bases de datos. Es debido a la existencia de regularidades estadísticas que son comúnmente una ley de grandes números para series financieras y de difícil reproducción artificial usando modelo estocásticos
+
+Las propiedades que se presentarán conciernen a precios diarios de stocks. Sea $p_t$ denotado el precio de un activo en el tiempo $t$ y $\varepsilon = \log(p_t/p_{t- 1})$ el log-retorno. La serie ($\varepsilon_t$) es frecuentemente cercano al precio relativo. En contraste a los precios, los retornos o retornos relativos que no dependen monetariamente en las unidades monetarias lo que facilita la comparación entre los activos. Los siguientes propiedeades han sido ampliamente comentadas en la literatura financiera.
+\begin{enumerate}
+  \item No estacionaridad de los precios.
+  \item Ausencia de correlación para la variación del os precios.
+  \item autocorrelación del cuadrado de los retornos.
+  \item Volatilidad del clustering.
+  \item Distribuciones con cola pesada.
+  \item Efectos palanca.
+  \item Estacionalidad.
+\end{enumerate}
+
+\subsection{Modelos con varianza aleatoria}
+
+Las propiedades previas ilustran la dificultad de modelación de las series financieras. cualquier modelo que se jacte de modelar una serie financiera debe de capturar las principales propiedades enlistadas previamente. Modelos clásicos como un ARMA son inapropiados. Ciertamente, la estructura de segundo orden de la mayoría de las series de tiempo es cercana al ruido blanco.
+
+El hecho que los retornos absolutos tienden a seguir otros valores de retorno absoluto es difícilmente compatible con el supuesto de varianza constante. Este fenomeno es llamado heterocedásticidad condicional
+\begin{align*}
+  \mathbb{V}ar[\varepsilon_t | \varepsilon_{t-1},\varepsilon_{t-2},\cdots] \neq const.
+\end{align*}
+heterocedásticidad condicional es perfectamente compatible con la estacionaridad (en el sentido estricto y en el segundo orden).
+Los modelos introducidos en la literatura econométrica son generalmente descritos en forma multiplicativa
+\begin{align*}
+  \varepsilon_t = \sigma_t \eta_t   
+\end{align*}
+donde $(\eta_t) $y $(\sigma_t)$ son procesos real tal que:
+\begin{enumerate}
+  \item $\sigma_t$ es medible con respecto a la $\sigma$-algebra denotada $\mathcal{F}$;
+  \item ($\eta_t$) es un proceso centrado con varianza $\eta_t$ siendo independiente de $\mathcal{F}_{t-1}$.
+  \item $(\sigma_t>0$).
+\end{enumerate}
+Esta formulación implica que el signo de la variación actual del precio. Sin embargo, si los primeros dos momentos de $\varepsilon_t$ existen, entonces están dados por 
+\begin{align*}
+  \mathbb{E}\left [\varepsilon_t|\mathcal{F}_{t-1}\right ] = 0, \:\:\:\: \mathbb{E}\left [\varepsilon^2 | \mathcal{F}_{t-1}     \right ] = \sigma_t^2.
+\end{align*}
+La variable aleatoria $\sigma_t$ se llama volatilidad de $\varepsilon_t$.
+Notese también que
+\begin{align*}
+  \mathbb{E}\left [\varepsilon_t  \right ]  = \mathbb{E}\left [\sigma_t \right ]\mathbb{E}\left [\eta_t \right ] = 0
+\end{align*}
+y 
+\begin{align*}
+  Cov(e_t,e_{t-h }) = \mathbb{E}\left [\eta_t\right ]\mathbb{E}\left [\sigma_t \varepsilon_{t-h}\right ] = 0, \:\:\: \forall h >0,
+\end{align*}
+lo que hace a $\varepsilon_t $ un ruido blanco débil. La serie de cuadrados, generalmente de covarianza no nula no es un ruido blanco débil.
+
+% La curtosis de $\varepsilon_t$
+
+Diferente clase de modelos pueden ser distinguidos dependiendo en las especificaciones adoptada por $\sigma_t$:
+\begin{enumerate}
+  \item procesos de heterocedásticidad condicional (o GARCH) para $\mathcal{F}_{t-1} = \sigma(\varepsilon_s: s<t)$ como la $\sigma$-algebra generada por el pasado de $\varepsilon_t$. La volatiliadad is aquí una función deterministica del pasado de $\varepsilon_t$. Procesos de esta clase difieren por la especificación de esta función. Los modelos GARCH estandar son caracterizados por la volatilidad especificada como una función lineal de los velores pasados de $\varepsilon_t^2$. 
+  \item Proceso de volatilidad estocástica para $\mathcal{F}_{t-1}$ que es la $\sigma$-algebra generado por $\{v_t,v_{t-1},\cdots\}$ donde $v_t$ es un ruido blanco independiente de $\eta_t$. En estos modelos, la volatiliadad es un proceso latente. El modelo más popular en esta clase es suponer que que el proceso $\log \sigma_t$ siguie un AR(1) de la forma
+  \begin{align*}
+    \log(\sigma_t ) = \omega + \varphi \log(\sigma_{t-1}) + \nu_t,
+  \end{align*}
+  donde los ruidos $v_t$ y $\eta_t$ son independientes.
+  \item Modelos de cambio de regimen para el cual $\sigma_t = \sigma(\Delta_t, \mathcal{F}_{t-1})$ donde $\Delta_t$ es el proceso latente independiente de $\eta_t$.
+\end{enumerate}
+
+\section{Apéndice}
+
+En esta sección se enuncian un par de teoremas para convergencia de variables aleatorias. Los enunciados y pruebas se encuentran en la pag. 126 de \cite{Walsh}
+
+\subsection{Teorema de Convergencia Dominada}
+
+Sea $X$ y $X_n, \:\: n = 1,2,\cdots$ variables aleatorias. Supongamos que existe una variable aletaria $Y$ tal que
+\begin{enumerate}
+  \item $|X_n| \leq Y$ a.s. para toda $n$.
+  \item $\lim_{n\leftarrow \infty} X_n  = X $ ya sea en probabilidad o a.e.
+  \item $\mathbb{E}\left [Y  \right ] < \infty$.
+\end{enumerate}
+Entonces,
+\begin{align*}
+  \lim_{n\rightarrow\infty} \mathbb{E}\left [X_n  \right ] = \mathbb{E}\left [X   \right ].
+\end{align*}
+
+\subsection{Teorema de Convergencia Monótona}
+
+Sea $X_1,X_2,\cdots$ variables aleatorias positivas tal que para cada $n$, $X_n \leq X_{n+1}$ a.s. y $\lim_{n\rightarrow \infty} = X $ a.s. Entonces,
+\begin{align*}
+  \lim_{n\rightarrow \infty } \mathbb{E}\left [X_n \right ] = \mathbb{E}\left [X \right ].
+\end{align*}
+
+
+
+
+
+
+\newpage
+
+
+% \bibliographystyle{plain} % We choose the "plain" reference style
+% \bibliography{refs} % Entries are in the refs.bib file
+
+% \cite{Brockwell}
+
+\begin{thebibliography}{9}
+
+  % \bibitem{Siebert}
+  % Siebert, J., Groß, J., and Schroth, C. (2021). A systematic review of python packages for time series analysis. arXiv preprint arXiv:2104.07406.
+
+  \bibitem{Brockwell}
+  Brockwell, P. J., and Davis, R. A. (Eds.). (2002). Introduction to time series and forecasting. New York, NY: Springer New York.
+
+  \bibitem{GARCH}
+  Franco, C., and Zakoian, J. M. (2019). GARCH models: structure, statistical inference and financial applications. John Wiley and Sons.
+  
+  \bibitem{Walsh}
+  Walsh, J. B. (2023). Knowing the odds: an introduction to probability (Vol. 139). American Mathematical Society.
+  
+  \end{thebibliography}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
