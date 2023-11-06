@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1698817882 "c:/Users/ce_ra/Documents/CIMAT/Semestres/Tercero/Series Tiempo/Series de tiempo/Examen/Examen.tex" "build/Examen.pdf" "Examen" 1698817884 0
+["pdflatex"] 1699245775 "c:/Users/ce_ra/Documents/CIMAT/Semestres/Tercero/Series Tiempo/Series de tiempo/Examen/Examen.tex" "build/Examen.pdf" "Examen" 1699245779 0
   "C:/Users/ce_ra/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1693352630 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/ce_ra/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1693352273 24120579 85898b25958cf632ec7946174c56943b ""
   "C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -217,11 +217,11 @@
   "C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656236890 56148 51a9a8571c07b9921892ae11063ae853 ""
   "C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-abspage.sty" 1650051284 2245 c8a4088d07cffc2e5207730c738edd76 ""
   "C:/Users/ce_ra/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-base.sty" 1650051284 20785 71a3d72ab517959a6979c27e6176bec1 ""
-  "Examen.tex" 1698817881 20823 8d8a1f8008765f39d7fbe57a024cfdaa ""
+  "Examen.tex" 1699245774 20821 cb2f6e0116107935c0980a54531d0c68 ""
   "Figures/EscudoCimat.png" 1694016590 23978 afd125464800623154e6cd8f9742e14b ""
-  "build/Examen.aux" 1698817884 877 45f001f23205ee326cb72b414b0ea9ee "pdflatex"
-  "build/Examen.out" 1698817883 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "c:/Users/ce_ra/Documents/CIMAT/Semestres/Tercero/Series Tiempo/Series de tiempo/Examen/Examen.tex" 1698817881 20823 8d8a1f8008765f39d7fbe57a024cfdaa ""
+  "build/Examen.aux" 1699245779 877 45f001f23205ee326cb72b414b0ea9ee "pdflatex"
+  "build/Examen.out" 1699245778 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "c:/Users/ce_ra/Documents/CIMAT/Semestres/Tercero/Series Tiempo/Series de tiempo/Examen/Examen.tex" 1699245774 20821 cb2f6e0116107935c0980a54531d0c68 ""
   (generated)
   "build/Examen.aux"
   "build/Examen.log"

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.8.29)  31 OCT 2023 23:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.8.29)  5 NOV 2023 22:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -862,8 +862,8 @@ Overfull \hbox (6.4638pt too wide) in paragraph at lines 239--240
 [3] [4] [5]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 368.
-Package mdframed Info: Not enough space on this page on input line 380.
+(mdframed)              on input line 367.
+Package mdframed Info: Not enough space on this page on input line 379.
  [6] [7] (c:\Users\ce_ra\Documents\CIMAT\Semestres\Tercero\Series Tiempo\Series de tiempo\Examen\build\Examen.aux
 LaTeX Info: Redefining \. on input line 23.
 LaTeX Info: Redefining \% on input line 23.
